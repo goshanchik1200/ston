@@ -5,39 +5,34 @@
 <title>Football Netanya</title>
 
 <style>
-html, body {
-  margin: 0;
-  height: 100%;
-  font-family: Arial, sans-serif;
-}
+* { box-sizing: border-box; }
 
 body {
-  background: linear-gradient(135deg, #0b6623, #145a32);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #111;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
 }
 
-.container {
+/* ===== HEADER ===== */
+header {
   background: white;
-  width: 420px;
-  border-radius: 12px;
-  box-shadow: 0 15px 40px rgba(0,0,0,.4);
-  padding: 30px;
-  position: relative;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
 }
 
-.header {
+.brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 12px;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   background: #0b6623;
   color: white;
   font-weight: bold;
@@ -47,64 +42,92 @@ body {
   border-radius: 6px;
 }
 
-.lang {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.company {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .lang select {
   font-size: 12px;
+  padding: 3px;
   color: black;
 }
 
-h1 {
-  font-size: 20px;
-  margin: 0;
+/* ===== LAYOUT ===== */
+.main {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
 }
 
-p {
-  margin: 10px 0;
-  color: #333;
+/* ===== SIDEBAR ===== */
+.sidebar {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid #ddd;
 }
 
-.meta {
-  font-size: 13px;
-  color: #555;
-  margin-top: 15px;
-}
-
-.buttons {
-  margin-top: 25px;
-  display: flex;
-  gap: 10px;
-}
-
-button {
-  flex: 1;
-  padding: 12px;
-  font-size: 14px;
-  border-radius: 6px;
+.sidebar button {
+  width: 100%;
+  padding: 10px;
+  background: #e5e5e5;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
 }
 
+/* ===== CONTENT ===== */
+.content {
+  background: white;
+  border-radius: 10px;
+  padding: 30px;
+  border: 1px solid #ddd;
+}
+
+h1 {
+  margin-top: 0;
+}
+
 .confirm {
+  margin-top: 25px;
+  padding: 14px 30px;
+  font-size: 16px;
   background: #0b6623;
   color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.contact {
-  background: #e5e5e5;
+.meta {
+  margin-top: 15px;
+  font-size: 13px;
+  color: #555;
 }
 
-.footer {
-  margin-top: 25px;
-  font-size: 11px;
-  color: #777;
+/* ===== AD ===== */
+.ad {
+  margin-top: 30px;
+  padding: 15px;
+  background: #eef3ef;
+  border-left: 4px solid #0b6623;
+  font-size: 14px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  margin-top: 40px;
+  padding: 20px;
   text-align: center;
+  font-size: 12px;
+  color: #777;
 }
 
+/* ===== MODAL ===== */
 .modal {
   position: fixed;
   inset: 0;
@@ -118,14 +141,18 @@ button {
   background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 260px;
+  width: 280px;
   text-align: center;
 }
 
 .modal-box button {
   margin-top: 15px;
+  padding: 8px 20px;
   background: #0b6623;
   color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .rtl {
@@ -137,7 +164,12 @@ button {
 
 <body>
 
-<div class="container" id="card">
+<header>
+  <div class="brand">
+    <div class="logo">FN</div>
+    <div class="company" id="company">כדורגל נתניה</div>
+  </div>
+
   <div class="lang">
     <select id="lang">
       <option value="he">עברית</option>
@@ -146,28 +178,34 @@ button {
       <option value="ar">العربية</option>
     </select>
   </div>
+</header>
 
-  <div class="header">
-    <div class="logo">FN</div>
-    <div id="company">כדורגל נתניה</div>
-  </div>
+<div class="main" id="card">
 
-  <h1 id="title"></h1>
-  <p id="line1"></p>
-  <p id="line2"></p>
-  <div class="meta" id="meta"></div>
+  <aside class="sidebar">
+    <h3 id="sideTitle">שירות לקוחות</h3>
+    <button id="contact">צור קשר</button>
+  </aside>
 
-  <div class="buttons">
+  <section class="content">
+    <h1 id="title"></h1>
+    <p id="line1"></p>
+    <p id="line2"></p>
+
     <button class="confirm" id="confirm"></button>
-    <button class="contact" id="contact"></button>
-  </div>
 
-  <div class="footer" id="foot"></div>
+    <div class="meta" id="meta"></div>
+
+    <div class="ad" id="ad"></div>
+  </section>
+
 </div>
+
+<footer id="foot"></footer>
 
 <div class="modal" id="modal">
   <div class="modal-box">
-    <div id="errorText">שגיאה זמנית. אנא נסה שוב מאוחר יותר.</div>
+    <div id="errorText"></div>
     <button onclick="closeModal()">OK</button>
   </div>
 </div>
@@ -187,14 +225,16 @@ const els = {
   confirm: document.getElementById("confirm"),
   contact: document.getElementById("contact"),
   foot: document.getElementById("foot"),
-  error: document.getElementById("errorText")
+  ad: document.getElementById("ad"),
+  error: document.getElementById("errorText"),
+  sideTitle: document.getElementById("sideTitle")
 };
 
 const t = {
-  he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל המאורגן על ידי גוף מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • גישה: למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות",err:"שגיאה זמנית. אנא נסה שוב מאוחר יותר."},
-  en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professionally organized football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Access: Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved",err:"Temporary error. Please try again later."},
-  fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Accès : Sur invitation",confirm:"Confirmer",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés",err:"Erreur temporaire. Veuillez réessayer plus tard."},
-  ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم.",l2:"يرجى تأكيد الحضور للحصول على التفاصيل.",meta:"الموقع: نتانيا • الدخول: بدعوة",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة",err:"خطأ مؤقت. يرجى المحاولة لاحقاً."}
+  he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל המאורגן על ידי מועדון מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • אירוע סגור למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות",ad:"נותן החסות הרשמי: אקדמיית הנוער נתניה • עונת 2026",err:"שגיאה זמנית. אנא נסה שוב מאוחר יותר.",side:"שירות לקוחות"},
+  en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professionally organized football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved",ad:"Official sponsor: Netanya Youth Academy • Season 2026",err:"Temporary error. Please try again later.",side:"Customer Service"},
+  fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Sur invitation",confirm:"Confirmer la participation",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés",ad:"Sponsor officiel : Académie de Jeunesse de Netanya",err:"Erreur temporaire. Veuillez réessayer plus tard.",side:"Service Client"},
+  ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم من قبل نادٍ محترف.",l2:"يرجى تأكيد الحضور للحصول على تفاصيل الدخول.",meta:"الموقع: نتانيا • الدخول بدعوة",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة",ad:"الراعي الرسمي: أكاديمية شباب نتانيا",err:"خطأ مؤقت. يرجى المحاولة لاحقاً.",side:"خدمة العملاء"}
 };
 
 function applyLang(l){
@@ -206,7 +246,9 @@ function applyLang(l){
   els.confirm.textContent = d.confirm;
   els.contact.textContent = d.contact;
   els.foot.textContent = d.foot;
+  els.ad.textContent = d.ad;
   els.error.textContent = d.err;
+  els.sideTitle.textContent = d.side;
   els.card.classList.toggle("rtl", d.rtl);
 }
 
