@@ -1,84 +1,183 @@
 <!DOCTYPE html>
 <html lang="he">
 <head>
-<meta charset="UTF-8">
-<title>הזמנה לאירוע כדורגל</title>
+<meta charset="UTF-8" />
+<title>Official Football Event Invitation</title>
 
 <style>
-html, body {
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  direction: rtl;
-  font-family: Arial, sans-serif;
+:root{
+  --bg1:#0b3d2e; --bg2:#134e4a; --card:#0f172acc;
+  --accent:#e6fffa; --btn:#e5e7eb; --btnText:#064e3b;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0; width:100%; height:100%;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+body{
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff;
+}
+.card{
+  width:min(520px,92vw);
+  background: rgba(15,23,42,.7);
+  backdrop-filter: blur(6px);
+  border-radius:16px;
+  padding:36px 40px 28px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.45);
+}
+.header{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:18px;
+}
+.badge{
+  font-size:12px; letter-spacing:.08em; opacity:.8;
+}
+h1{
+  margin:10px 0 8px; font-size:28px; font-weight:700;
+}
+p{opacity:.92; line-height:1.55}
+.meta{
+  margin-top:14px; font-size:14px; opacity:.85;
+}
+.btn{
+  margin-top:22px; width:100%;
+  padding:14px 18px; font-size:16px; font-weight:600;
+  background: var(--btn); color: var(--btnText);
+  border:none; border-radius:10px; cursor:pointer;
+  transition:.2s;
+}
+.btn:hover{transform:translateY(-1px); background:#f3f4f6}
+.footer{
+  margin-top:14px; font-size:12px; opacity:.7; text-align:center;
 }
 
-body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #0b6623, #145a32);
-  color: white;
+/* Language switcher (subtle, corner) */
+.lang{
+  position:fixed; top:10px; right:12px;
+  font-size:12px; opacity:.7;
+}
+.lang select{
+  background:transparent; color:#fff; border:1px solid rgba(255,255,255,.35);
+  border-radius:8px; padding:4px 6px;
 }
 
-.card {
-  background: rgba(0,0,0,0.35);
-  padding: 40px;
-  border-radius: 15px;
-  text-align: center;
-  max-width: 400px;
-  box-shadow: 0 0 30px rgba(0,0,0,0.5);
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-
-p {
-  opacity: 0.9;
-}
-
-button {
-  margin-top: 25px;
-  padding: 15px 30px;
-  font-size: 18px;
-  background: #ffffff;
-  color: #0b6623;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #eaeaea;
-  transform: scale(1.05);
-}
-
-.small {
-  margin-top: 15px;
-  font-size: 12px;
-  opacity: 0.7;
-}
+/* RTL handling */
+.rtl{ direction: rtl; }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>הזמנה רשמית</h1>
-  <p>הנך מוזמן להשתתף באירוע כדורגל מיוחד</p>
-  <p><strong>נא לאשר הגעה כדי לקבל פרטים מלאים</strong></p>
+<div class="lang">
+  <select id="lang">
+    <option value="he">עברית</option>
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="ar">العربية</option>
+  </select>
+</div>
 
-  <button id="confirm">אישור השתתפות</button>
+<div class="card" id="card">
+  <div class="header">
+    <div class="badge" id="badge">OFFICIAL INVITATION</div>
+  </div>
 
-  <div class="small">אירוע סגור • הכניסה למוזמנים בלבד</div>
+  <h1 id="title">הזמנה רשמית לאירוע כדורגל</h1>
+  <p id="line1">הנך מוזמן להשתתף באירוע כדורגל ייחודי בהשתתפות מוזמנים בלבד.</p>
+  <p id="line2"><strong>אנא אשר הגעה כדי לקבל פרטי גישה מלאים.</strong></p>
+
+  <div class="meta" id="meta">
+    Location: Confidential • Access: Invitation Only
+  </div>
+
+  <button class="btn" id="confirm">אישור השתתפות</button>
+
+  <div class="footer" id="foot">
+    This page is protected • © Event Coordination Office
+  </div>
 </div>
 
 <audio id="audio" src="ston.mp3"></audio>
 
 <script>
-document.getElementById("confirm").onclick = () => {
+const t = {
+  he:{
+    rtl:true,
+    badge:"הזמנה רשמית",
+    title:"הזמנה רשמית לאירוע כדורגל",
+    line1:"הנך מוזמן להשתתף באירוע כדורגל ייחודי בהשתתפות מוזמנים בלבד.",
+    line2:"אנא אשר הגעה כדי לקבל פרטי גישה מלאים.",
+    meta:"מיקום: חסוי • גישה: למוזמנים בלבד",
+    confirm:"אישור השתתפות",
+    foot:"עמוד זה מאובטח • © משרד תיאום אירועים"
+  },
+  en:{
+    rtl:false,
+    badge:"OFFICIAL INVITATION",
+    title:"Official Football Event Invitation",
+    line1:"You are invited to attend a private football event with limited access.",
+    line2:"Please confirm your attendance to receive full access details.",
+    meta:"Location: Confidential • Access: Invitation Only",
+    confirm:"Confirm Attendance",
+    foot:"This page is protected • © Event Coordination Office"
+  },
+  fr:{
+    rtl:false,
+    badge:"INVITATION OFFICIELLE",
+    title:"Invitation Officielle à un Événement de Football",
+    line1:"Vous êtes invité à participer à un événement de football privé sur invitation.",
+    line2:"Veuillez confirmer votre présence pour recevoir les détails d’accès.",
+    meta:"Lieu : Confidentiel • Accès : Sur invitation",
+    confirm:"Confirmer la participation",
+    foot:"Page sécurisée • © Bureau de coordination des événements"
+  },
+  ar:{
+    rtl:true,
+    badge:"دعوة رسمية",
+    title:"دعوة رسمية لحدث كرة قدم",
+    line1:"أنت مدعو لحضور حدث كرة قدم خاص بدعوة فقط.",
+    line2:"يرجى تأكيد الحضور للحصول على تفاصيل الدخول الكاملة.",
+    meta:"الموقع: سري • الدخول: بدعوة فقط",
+    confirm:"تأكيد الحضور",
+    foot:"هذه الصفحة محمية • © مكتب تنسيق الفعاليات"
+  }
+};
+
+const els = {
+  card: document.getElementById("card"),
+  badge: document.getElementById("badge"),
+  title: document.getElementById("title"),
+  line1: document.getElementById("line1"),
+  line2: document.getElementById("line2"),
+  meta: document.getElementById("meta"),
+  confirm: document.getElementById("confirm"),
+  foot: document.getElementById("foot"),
+};
+
+function applyLang(l){
+  const d = t[l];
+  els.badge.textContent = d.badge;
+  els.title.textContent = d.title;
+  els.line1.textContent = d.line1;
+  els.line2.textContent = d.line2;
+  els.meta.textContent = d.meta;
+  els.confirm.textContent = d.confirm;
+  els.foot.textContent = d.foot;
+  els.card.classList.toggle("rtl", d.rtl);
+  document.documentElement.lang = l;
+}
+
+document.getElementById("lang").addEventListener("change", e=>{
+  applyLang(e.target.value);
+});
+
+// default Hebrew
+applyLang("he");
+
+// play on confirm (required by browsers)
+document.getElementById("confirm").onclick = ()=>{
   document.getElementById("audio").play();
 };
 </script>
