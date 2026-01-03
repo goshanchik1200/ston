@@ -1,3 +1,179 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<title>Football Netanya</title>
+
+<style>
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0b6623, #145a32);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #111;
+}
+
+.container {
+  background: white;
+  width: 420px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.4);
+  padding: 30px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background: #0b6623;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.lang {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.lang select {
+  font-size: 12px;
+  color: black;
+}
+
+h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+p {
+  margin: 10px 0;
+  color: #333;
+}
+
+.meta {
+  font-size: 13px;
+  color: #555;
+  margin-top: 15px;
+}
+
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.confirm {
+  background: #0b6623;
+  color: white;
+}
+
+.contact {
+  background: #e5e5e5;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #777;
+  text-align: center;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 260px;
+  text-align: center;
+}
+
+.modal-box button {
+  margin-top: 15px;
+  background: #0b6623;
+  color: white;
+}
+
+.rtl {
+  direction: rtl;
+  text-align: right;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="card">
+  <div class="lang">
+    <select id="lang">
+      <option value="he">עברית</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+
+  <div class="header">
+    <div class="logo">FN</div>
+    <div id="company">כדורגל נתניה</div>
+  </div>
+
+  <h1 id="title"></h1>
+  <p id="line1"></p>
+  <p id="line2"></p>
+  <div class="meta" id="meta"></div>
+
+  <div class="buttons">
+    <button class="confirm" id="confirm"></button>
+    <button class="contact" id="contact"></button>
+  </div>
+
+  <div class="footer" id="foot"></div>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div id="errorText">שגיאה זמנית. אנא נסה שוב מאוחר יותר.</div>
+    <button onclick="closeModal()">OK</button>
+  </div>
+</div>
+
+<audio id="audio" src="ston.mp3"></audio>
+
 <script>
 const audio = document.getElementById("audio");
 const modal = document.getElementById("modal");
@@ -10,14 +186,15 @@ const els = {
   meta: document.getElementById("meta"),
   confirm: document.getElementById("confirm"),
   contact: document.getElementById("contact"),
-  foot: document.getElementById("foot")
+  foot: document.getElementById("foot"),
+  error: document.getElementById("errorText")
 };
 
 const t = {
-  he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל ייחודי המאורגן על ידי גוף מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • גישה: למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות"},
-  en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professional football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Access: Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved"},
-  fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à participer à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Accès : Sur invitation",confirm:"Confirmer la participation",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés"},
-  ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم بشكل احترافي.",l2:"يرجى تأكيد الحضور للحصول على تفاصيل الدخول.",meta:"الموقع: نتانيا • الدخول: بدعوة فقط",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة"}
+  he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל המאורגן על ידי גוף מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • גישה: למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות",err:"שגיאה זמנית. אנא נסה שוב מאוחר יותר."},
+  en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professionally organized football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Access: Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved",err:"Temporary error. Please try again later."},
+  fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Accès : Sur invitation",confirm:"Confirmer",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés",err:"Erreur temporaire. Veuillez réessayer plus tard."},
+  ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم.",l2:"يرجى تأكيد الحضور للحصول على التفاصيل.",meta:"الموقع: نتانيا • الدخول: بدعوة",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة",err:"خطأ مؤقت. يرجى المحاولة لاحقاً."}
 };
 
 function applyLang(l){
@@ -29,28 +206,26 @@ function applyLang(l){
   els.confirm.textContent = d.confirm;
   els.contact.textContent = d.contact;
   els.foot.textContent = d.foot;
+  els.error.textContent = d.err;
   els.card.classList.toggle("rtl", d.rtl);
-  document.documentElement.lang = l;
 }
 
-document.getElementById("lang").addEventListener("change", e => {
-  applyLang(e.target.value);
-});
-
+document.getElementById("lang").onchange = e => applyLang(e.target.value);
 applyLang("he");
 
-// КНОПКА ПОДТВЕРЖДЕНИЯ — ИГРАЕТ ЗВУК
-els.confirm.addEventListener("click", () => {
+els.confirm.onclick = () => {
   audio.currentTime = 0;
   audio.play();
-});
+};
 
-// КНОПКА СВЯЗИ — ОШИБКА
-els.contact.addEventListener("click", () => {
+els.contact.onclick = () => {
   modal.style.display = "flex";
-});
+};
 
 function closeModal(){
   modal.style.display = "none";
 }
 </script>
+
+</body>
+</html>
