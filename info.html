@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<title>מידע נוסף | כדורגל נתניה</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef2f6;
+  color: #111;
+}
+
+header {
+  background: #0b2a5b;
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.language select {
+  padding: 4px;
+  font-size: 13px;
+  color: black;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  line-height: 1.8;
+}
+
+h1, h2 {
+  color: #0b2a5b;
+}
+
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  padding: 25px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">⚽ כדורגל נתניה</div>
+  <div class="language">
+    <select onchange="changeLang(this.value)">
+      <option value="he">עברית</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+</header>
+
+<div class="container" id="content">
+
+<h1>ברוך הבא לתוכנית ההזמנות המיוחדות של כדורגל נתניה</h1>
+
+<p>
+כדורגל נתניה שמחה להזמינך לקחת חלק ביוזמה ייחודית ויוצאת דופן, המיועדת לשחקנים, אוהדים ומשתתפים אשר היו מעורבים בעבר בפעילות ספורטיבית הקשורה לכדורגל.
+</p>
+
+<p>
+מדובר באירוע מיוחד, הנערך במספר מועדים מוגבל במהלך השנה, ואינו פתוח לציבור הרחב.
+</p>
+
+<h2>מהי תוכנית ההזמנה המיוחדת?</h2>
+
+<p>
+התוכנית נועדה לאתר משתתפים בעלי רקע או מעורבות קודמת בתחום הכדורגל, ולהעניק להם הזדמנות לקחת חלק באירוע ייחודי בעל חשיפה גבוהה.
+</p>
+
+<ul>
+  <li>משחק מיוחד בפורמט סגור</li>
+  <li>נוכחות גורמים מקצועיים</li>
+  <li>תיעוד פנימי של האירוע</li>
+  <li>חוויית השתתפות שאינה מתקיימת במסגרת רגילה</li>
+</ul>
+
+<h2>כיצד מתבצע תהליך הבחירה?</h2>
+
+<p>
+הבחירה מתבצעת באמצעות מערכת אוטומטית הסורקת מאגרי מידע קיימים, הכוללים השתתפות קודמת בפעילות ספורטיבית, רישומים לאירועים ונתוני עניין כלליים.
+</p>
+
+<p>
+הבחירה אינה פתוחה להרשמה חופשית ואינה אקראית.
+</p>
+
+<h2>למה נבחרת דווקא אתה?</h2>
+
+<p>
+הפרופיל שלך נמצא תואם לקריטריונים של האירוע הקרוב. הבחירה מעידה על התאמה כללית ואינה מהווה התחייבות עתידית.
+</p>
+
+<h2>מה קורה לאחר אישור ההשתתפות?</h2>
+
+<p>
+לאחר אישור ההגעה, יישלחו פרטים נוספים בסמוך למועד האירוע, כולל מיקום, שעות והנחיות כלליות.
+</p>
+
+<p>
+בשל רגישות האירוע, פרטים מלאים נמסרים אך ורק למשתתפים שאישרו הגעה.
+</p>
+
+<h2>מידע חשוב</h2>
+
+<ul>
+  <li>מספר המקומות מוגבל</li>
+  <li>האירוע מיועד למוזמנים בלבד</li>
+  <li>אין להעביר הזמנה לגורם אחר</li>
+  <li>ההנהלה שומרת לעצמה את הזכות לבצע שינויים</li>
+</ul>
+
+<p>
+אם קיבלת הודעה זו – סימן שאתה חלק מקבוצה מצומצמת שנבחרה להשתתף ביוזמה ייחודית.
+</p>
+
+</div>
+
+<div class="footer">
+© 2026 Netanya Football Organization
+</div>
+
+<script>
+const translations = {
+en: `
+<h1>Welcome to the Special Invitation Program</h1>
+<p>Netanya Football is pleased to invite you to a unique football-related initiative.</p>
+<h2>What is this program?</h2>
+<p>This is a closed event with limited availability.</p>
+<h2>How does the selection work?</h2>
+<p>Participants are selected automatically based on previous involvement.</p>
+<h2>Why were you selected?</h2>
+<p>Your profile matched the event criteria.</p>
+<h2>What happens next?</h2>
+<p>Additional details will be sent after confirmation.</p>
+`,
+fr: `
+<h1>Bienvenue au programme d'invitation spéciale</h1>
+<p>Netanya Football vous invite à un événement unique.</p>
+<h2>Qu'est-ce que ce programme ?</h2>
+<p>Événement fermé avec places limitées.</p>
+<h2>Comment fonctionne la sélection ?</h2>
+<p>Sélection automatique selon l’activité passée.</p>
+<h2>Pourquoi avez-vous été choisi ?</h2>
+<p>Votre profil correspond aux critères.</p>
+<h2>Que se passe-t-il ensuite ?</h2>
+<p>Les détails seront envoyés après confirmation.</p>
+`,
+ar: `
+<h1>مرحبًا بكم في برنامج الدعوة الخاصة</h1>
+<p>يسر كرة قدم نتانيا دعوتكم إلى حدث مميز.</p>
+<h2>ما هو هذا البرنامج؟</h2>
+<p>حدث مغلق بعدد محدود من المشاركين.</p>
+<h2>كيف يتم الاختيار؟</h2>
+<p>يتم الاختيار تلقائيًا بناءً على النشاط السابق.</p>
+<h2>لماذا تم اختيارك؟</h2>
+<p>ملفك يتوافق مع معايير الحدث.</p>
+<h2>ماذا يحدث بعد ذلك؟</h2>
+<p>سيتم إرسال التفاصيل بعد التأكيد.</p>
+`
+};
+
+function changeLang(lang) {
+  if (lang === "he") location.reload();
+  document.getElementById("content").innerHTML = translations[lang];
+}
+</script>
+
+</body>
+</html>
