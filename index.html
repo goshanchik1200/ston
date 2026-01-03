@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<title>הזמנה רשמית | כדורגל נתניה</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #e9eef3;
+}
+
+header {
+  background: #0b2a5b;
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand span {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.language select {
+  padding: 4px;
+  font-size: 13px;
+  color: black;
+}
+
+.main {
+  max-width: 800px;
+  margin: 50px auto;
+  background: white;
+  padding: 40px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+h1 {
+  color: #0b2a5b;
+}
+
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.confirm {
+  background: #0b2a5b;
+  color: white;
+}
+
+.info {
+  background: #e0e0e0;
+}
+
+.contact {
+  background: #f5f5f5;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  flex-direction: column;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    ⚽ <span>כדורגל נתניה</span>
+  </div>
+
+  <div class="language">
+    <select onchange="changeLang(this.value)">
+      <option value="he">עברית</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+</header>
+
+<div class="main" id="content">
+  <h1>הזמנה לאירוע כדורגל מיוחד</h1>
+  <p>
+  נבחרת להשתתף באירוע ייחודי של כדורגל נתניה.
+  מספר המקומות מוגבל וההשתתפות מותנית באישור מוקדם.
+  </p>
+
+  <div class="buttons">
+    <button class="confirm" onclick="playSound()">אישור השתתפות</button>
+    <button class="info" onclick="location.href='info.html'">ℹ️ מידע נוסף</button>
+    <button class="contact" onclick="contact()">צור קשר</button>
+  </div>
+</div>
+
+<div id="overlay">
+  <div id="overlayText">טוען...</div>
+</div>
+
+<audio id="sound" src="ston.mp3"></audio>
+
+<script>
+function playSound() {
+  document.getElementById("sound").play();
+}
+
+function contact() {
+  const overlay = document.getElementById("overlay");
+  const text = document.getElementById("overlayText");
+
+  overlay.style.display = "flex";
+  text.innerText = "מתחבר לשרתים...";
+
+  setTimeout(() => {
+    text.innerText = "שגיאה זמנית. נסה שוב מאוחר יותר.";
+  }, 2500);
+
+  setTimeout(() => {
+    overlay.style.display = "none";
+  }, 5000);
+}
+
+const translations = {
+  en: `
+    <h1>Official Football Event Invitation</h1>
+    <p>You have been selected to participate in a special football event.</p>
+    <div class="buttons">
+      <button class="confirm" onclick="playSound()">Confirm Participation</button>
+      <button class="info" onclick="location.href='info.html'">ℹ️ More Information</button>
+      <button class="contact" onclick="contact()">Contact Us</button>
+    </div>
+  `,
+  fr: `
+    <h1>Invitation officielle à un événement de football</h1>
+    <p>Vous avez été sélectionné pour participer à un événement spécial.</p>
+    <div class="buttons">
+      <button class="confirm" onclick="playSound()">Confirmer</button>
+      <button class="info" onclick="location.href='info.html'">ℹ️ Plus d'informations</button>
+      <button class="contact" onclick="contact()">Contact</button>
+    </div>
+  `,
+  ar: `
+    <h1>دعوة رسمية لحدث كرة قدم</h1>
+    <p>تم اختيارك للمشاركة في حدث خاص.</p>
+    <div class="buttons">
+      <button class="confirm" onclick="playSound()">تأكيد المشاركة</button>
+      <button class="info" onclick="location.href='info.html'">ℹ️ معلومات إضافية</button>
+      <button class="contact" onclick="contact()">اتصل بنا</button>
+    </div>
+  `
+};
+
+function changeLang(lang) {
+  if (lang === "he") location.reload();
+  else document.getElementById("content").innerHTML = translations[lang];
+}
+</script>
+
+</body>
+</html>
