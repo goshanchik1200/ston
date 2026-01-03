@@ -5,160 +5,141 @@
 <title>Football Netanya</title>
 
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #222;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#222;
 }
 
-/* ===== HEADER ===== */
-header {
-  background: white;
-  padding: 15px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ddd;
+/* HEADER */
+header{
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+.brand{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
-.logo {
-  width: 42px;
-  height: 42px;
-  background: #0b6623;
-  color: white;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
+.brand-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.company {
-  font-size: 18px;
-  font-weight: bold;
+.logo{
+  width:42px;
+  height:42px;
+  background:#0b6623;
+  color:#fff;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
 }
 
-.lang select {
-  font-size: 12px;
-  padding: 3px;
-  color: black;
+.company{
+  font-size:18px;
+  font-weight:bold;
 }
 
-/* ===== LAYOUT ===== */
-.main {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 30px;
+.brand button{
+  width:140px;
+  padding:7px;
+  border:none;
+  background:#e6e6e6;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-/* ===== SIDEBAR ===== */
-.sidebar {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  border: 1px solid #ddd;
+/* LANG */
+.lang select{
+  font-size:12px;
+  color:black;
 }
 
-.sidebar button {
-  width: 100%;
-  padding: 10px;
-  background: #e5e5e5;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+/* MAIN */
+main{
+  max-width:800px;
+  margin:40px auto;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius:10px;
+  padding:30px;
 }
 
-/* ===== CONTENT ===== */
-.content {
-  background: white;
-  border-radius: 10px;
-  padding: 30px;
-  border: 1px solid #ddd;
+.confirm{
+  margin-top:25px;
+  padding:14px 30px;
+  font-size:16px;
+  background:#0b6623;
+  color:white;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
 }
 
-h1 {
-  margin-top: 0;
+.info{
+  margin-top:15px;
+  display:inline-block;
+  text-decoration:none;
+  color:#0b6623;
+  font-weight:bold;
 }
 
-.confirm {
-  margin-top: 25px;
-  padding: 14px 30px;
-  font-size: 16px;
-  background: #0b6623;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
+.meta{
+  margin-top:15px;
+  font-size:13px;
+  color:#555;
 }
 
-.meta {
-  margin-top: 15px;
-  font-size: 13px;
-  color: #555;
+/* LOADING + MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
 }
 
-/* ===== AD ===== */
-.ad {
-  margin-top: 30px;
-  padding: 15px;
-  background: #eef3ef;
-  border-left: 4px solid #0b6623;
-  font-size: 14px;
+.box{
+  background:white;
+  padding:25px;
+  border-radius:8px;
+  text-align:center;
+  width:280px;
 }
 
-/* ===== FOOTER ===== */
-footer {
-  margin-top: 40px;
-  padding: 20px;
-  text-align: center;
-  font-size: 12px;
-  color: #777;
+.loader{
+  border:4px solid #ddd;
+  border-top:4px solid #0b6623;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  margin:0 auto 15px;
+  animation:spin 1s linear infinite;
 }
 
-/* ===== MODAL ===== */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{
+  margin:40px 0 20px;
+  text-align:center;
+  font-size:12px;
+  color:#777;
 }
 
-.modal-box {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 280px;
-  text-align: center;
-}
-
-.modal-box button {
-  margin-top: 15px;
-  padding: 8px 20px;
-  background: #0b6623;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.rtl {
-  direction: rtl;
-  text-align: right;
-}
+.rtl{direction:rtl;text-align:right}
 </style>
 </head>
 
@@ -166,8 +147,11 @@ footer {
 
 <header>
   <div class="brand">
-    <div class="logo">FN</div>
-    <div class="company" id="company">כדורגל נתניה</div>
+    <div class="brand-top">
+      <div class="logo">FN</div>
+      <div class="company" id="company">כדורגל נתניה</div>
+    </div>
+    <button id="contact"></button>
   </div>
 
   <div class="lang">
@@ -180,32 +164,22 @@ footer {
   </div>
 </header>
 
-<div class="main" id="card">
+<main id="card">
+  <h1 id="title"></h1>
+  <p id="line1"></p>
+  <p id="line2"></p>
 
-  <aside class="sidebar">
-    <h3 id="sideTitle">שירות לקוחות</h3>
-    <button id="contact">צור קשר</button>
-  </aside>
+  <button class="confirm" id="confirm"></button><br>
+  <a class="info" href="info.html" id="info">ℹ️ מידע נוסף</a>
 
-  <section class="content">
-    <h1 id="title"></h1>
-    <p id="line1"></p>
-    <p id="line2"></p>
-
-    <button class="confirm" id="confirm"></button>
-
-    <div class="meta" id="meta"></div>
-
-    <div class="ad" id="ad"></div>
-  </section>
-
-</div>
+  <div class="meta" id="meta"></div>
+</main>
 
 <footer id="foot"></footer>
 
 <div class="modal" id="modal">
-  <div class="modal-box">
-    <div id="errorText"></div>
+  <div class="box">
+    <div id="modalContent"></div>
     <button onclick="closeModal()">OK</button>
   </div>
 </div>
@@ -213,60 +187,59 @@ footer {
 <audio id="audio" src="ston.mp3"></audio>
 
 <script>
-const audio = document.getElementById("audio");
-const modal = document.getElementById("modal");
+const audio=document.getElementById("audio");
+const modal=document.getElementById("modal");
+const modalContent=document.getElementById("modalContent");
 
-const els = {
-  card: document.getElementById("card"),
-  title: document.getElementById("title"),
-  line1: document.getElementById("line1"),
-  line2: document.getElementById("line2"),
-  meta: document.getElementById("meta"),
-  confirm: document.getElementById("confirm"),
-  contact: document.getElementById("contact"),
-  foot: document.getElementById("foot"),
-  ad: document.getElementById("ad"),
-  error: document.getElementById("errorText"),
-  sideTitle: document.getElementById("sideTitle")
+const els={
+  card:document.getElementById("card"),
+  title:document.getElementById("title"),
+  line1:document.getElementById("line1"),
+  line2:document.getElementById("line2"),
+  meta:document.getElementById("meta"),
+  confirm:document.getElementById("confirm"),
+  contact:document.getElementById("contact"),
+  foot:document.getElementById("foot"),
+  info:document.getElementById("info")
 };
 
-const t = {
-  he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל המאורגן על ידי מועדון מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • אירוע סגור למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות",ad:"נותן החסות הרשמי: אקדמיית הנוער נתניה • עונת 2026",err:"שגיאה זמנית. אנא נסה שוב מאוחר יותר.",side:"שירות לקוחות"},
-  en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professionally organized football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved",ad:"Official sponsor: Netanya Youth Academy • Season 2026",err:"Temporary error. Please try again later.",side:"Customer Service"},
-  fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Sur invitation",confirm:"Confirmer la participation",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés",ad:"Sponsor officiel : Académie de Jeunesse de Netanya",err:"Erreur temporaire. Veuillez réessayer plus tard.",side:"Service Client"},
-  ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم من قبل نادٍ محترف.",l2:"يرجى تأكيد الحضور للحصول على تفاصيل الدخول.",meta:"الموقع: نتانيا • الدخول بدعوة",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة",ad:"الراعي الرسمي: أكاديمية شباب نتانيا",err:"خطأ مؤقت. يرجى المحاولة لاحقاً.",side:"خدمة العملاء"}
+const t={
+he:{rtl:true,title:"הזמנה רשמית לאירוע כדורגל",l1:"הנך מוזמן להשתתף באירוע כדורגל ייחודי המאורגן על ידי גוף מקצועי.",l2:"נא לאשר הגעה לצורך קבלת פרטי כניסה.",meta:"מיקום: נתניה • אירוע סגור למוזמנים בלבד",confirm:"אישור השתתפות",contact:"צור קשר",foot:"© כדורגל נתניה • כל הזכויות שמורות",info:"ℹ️ מידע נוסף",load:"טוען נתונים…",err:"שגיאה זמנית. אנא נסה שוב מאוחר יותר."},
+en:{rtl:false,title:"Official Football Event Invitation",l1:"You are invited to attend a professionally organized football event.",l2:"Please confirm attendance to receive access details.",meta:"Location: Netanya • Invitation Only",confirm:"Confirm Attendance",contact:"Contact Us",foot:"© Football Netanya • All rights reserved",info:"ℹ️ More information",load:"Loading request…",err:"Temporary error. Please try again later."},
+fr:{rtl:false,title:"Invitation Officielle à un Événement de Football",l1:"Vous êtes invité à un événement de football professionnel.",l2:"Veuillez confirmer votre présence pour recevoir les détails.",meta:"Lieu : Netanya • Sur invitation",confirm:"Confirmer la participation",contact:"Nous contacter",foot:"© Football Netanya • Tous droits réservés",info:"ℹ️ Plus d'informations",load:"Chargement…",err:"Erreur temporaire. Veuillez réessayer plus tard."},
+ar:{rtl:true,title:"دعوة رسمية لحدث كرة قدم",l1:"أنت مدعو لحضور حدث كرة قدم منظم من قبل جهة محترفة.",l2:"يرجى تأكيد الحضور للحصول على تفاصيل الدخول.",meta:"الموقع: نتانيا • الدخول بدعوة",confirm:"تأكيد الحضور",contact:"اتصل بنا",foot:"© كرة قدم نتانيا • جميع الحقوق محفوظة",info:"ℹ️ معلومات إضافية",load:"جارٍ التحميل…",err:"خطأ مؤقت. يرجى المحاولة لاحقاً."}
 };
 
 function applyLang(l){
-  const d = t[l];
-  els.title.textContent = d.title;
-  els.line1.textContent = d.l1;
-  els.line2.textContent = d.l2;
-  els.meta.textContent = d.meta;
-  els.confirm.textContent = d.confirm;
-  els.contact.textContent = d.contact;
-  els.foot.textContent = d.foot;
-  els.ad.textContent = d.ad;
-  els.error.textContent = d.err;
-  els.sideTitle.textContent = d.side;
-  els.card.classList.toggle("rtl", d.rtl);
+  const d=t[l];
+  els.title.textContent=d.title;
+  els.line1.textContent=d.l1;
+  els.line2.textContent=d.l2;
+  els.meta.textContent=d.meta;
+  els.confirm.textContent=d.confirm;
+  els.contact.textContent=d.contact;
+  els.foot.textContent=d.foot;
+  els.info.textContent=d.info;
+  els.card.classList.toggle("rtl",d.rtl);
 }
 
-document.getElementById("lang").onchange = e => applyLang(e.target.value);
+document.getElementById("lang").onchange=e=>applyLang(e.target.value);
 applyLang("he");
 
-els.confirm.onclick = () => {
-  audio.currentTime = 0;
+els.confirm.onclick=()=>{
+  audio.currentTime=0;
   audio.play();
 };
 
-els.contact.onclick = () => {
-  modal.style.display = "flex";
+els.contact.onclick=()=>{
+  modal.style.display="flex";
+  modalContent.innerHTML=`<div class="loader"></div><div>${t[document.getElementById("lang").value].load}</div>`;
+  setTimeout(()=>{
+    modalContent.textContent=t[document.getElementById("lang").value].err;
+  },2000);
 };
 
-function closeModal(){
-  modal.style.display = "none";
-}
+function closeModal(){modal.style.display="none";}
 </script>
 
 </body>
