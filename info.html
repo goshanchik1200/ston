@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+<meta charset="UTF-8">
+<title>מידע נוסף – כדורגל נתניה</title>
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  color:#222;
+  line-height:1.6;
+  padding:20px;
+}
+header{
+  background:#fff;
+  border-bottom:1px solid #ddd;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.brand-top{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo{
+  width:42px;
+  height:42px;
+  background:#0b6623;
+  color:#fff;
+  font-weight:bold;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:6px;
+}
+.company{
+  font-size:18px;
+  font-weight:bold;
+}
+.lang select{
+  font-size:12px;
+  color:black;
+}
+main{
+  max-width:900px;
+  margin:30px auto;
+  background:#fff;
+  border-radius:10px;
+  padding:30px;
+  border:1px solid #ddd;
+}
+h1{
+  margin-top:0;
+}
+.rtl{direction:rtl;text-align:right}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-top">
+      <div class="logo">FN</div>
+      <div class="company" id="company">כדורגל נתניה</div>
+    </div>
+  </div>
+
+  <div class="lang">
+    <select id="lang">
+      <option value="he">עברית</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="ar">العربية</option>
+    </select>
+  </div>
+</header>
+
+<main id="content">
+  <h1 id="title"></h1>
+  <div id="text"></div>
+</main>
+
+<script>
+const els={
+  title:document.getElementById("title"),
+  text:document.getElementById("text")
+};
+
+const t={
+he:{
+title:"מידע נוסף על האירוע המיוחד",
+text:`<p>ברוך הבא לתוכנית ההזמנות המיוחדות של כדורגל נתניה.</p>
+<p>כדורגל נתניה שמחה להזמינך לקחת חלק ביוזמה ייחודית ויוצאת דופן, המיועדת לשחקנים, אוהדים ומשתתפים אשר היו מעורבים בעבר בפעילות ספורטיבית רשמית או חצי־רשמית הקשורה לכדורגל.</p>
+<p>מדובר באירוע מיוחד, הנערך במספר מועדים מוגבל במהלך השנה, ומטרתו לחבר בין הקהילה, השחקנים והדור הבא של הכדורגל המקומי – במסגרת מקצועית, מפוקחת ובלתי פתוחה לציבור הרחב.</p>
+
+<h2>מהי תוכנית ההזמנה המיוחדת?</h2>
+<p>התוכנית נועדה לאתר משתתפים בעלי רקע, עניין או מעורבות קודמת בתחום הכדורגל, ולהעניק להם הזדמנות לקחת חלק באירוע ייחודי בעל חשיפה גבוהה.</p>
+<p>האירוע כולל:</p>
+<ul>
+<li>משחק מיוחד בפורמט שאינו פתוח לציבור</li>
+<li>נוכחות של גורמים מקצועיים מהתחום</li>
+<li>תיעוד תקשורתי פנימי</li>
+<li>חוויית השתתפות יוצאת דופן שאינה מתקיימת במסגרת משחקים רגילים</li>
+</ul>
+
+<h2>כיצד מתבצע תהליך הבחירה?</h2>
+<p>במהלך השנה, המערכת של כדורגל נתניה מבצעת סריקות תקופתיות על בסיס נתונים קיימים, הכוללים:</p>
+<ul>
+<li>השתתפות קודמת באירועי כדורגל</li>
+<li>מעורבות בפעילות ספורטיבית קהילתית</li>
+<li>רישומים קודמים לאירועים או מסגרות קשורות</li>
+</ul>
+<p>הבחירה מתבצעת באופן אוטומטי ושוויוני, ללא התערבות ידנית, ומתוך מאגר מצומצם של מועמדים רלוונטיים בלבד.</p>
+
+<h2>למה נבחרת דווקא אתה?</h2>
+<p>בחירתך מעידה כי נמצאה התאמה בין הפרופיל שלך לבין הקריטריונים של האירוע הקרוב. אין מדובר בהגרלה פתוחה, אלא בהתאמה על בסיס פעילות קודמת ועניין מוכח בתחום.</p>
+<p>חשוב לציין:</p>
+<ul>
+<li>הבחירה אינה מעידה על התחייבות עתידית</li>
+<li>אין חובה להשתתף</li>
+<li>ניתן לסרב להזמנה ללא כל השלכות</li>
+</ul>
+
+<h2>מה צפוי לאחר אישור ההשתתפות?</h2>
+<p>לאחר אישור ההגעה:</p>
+<ul>
+<li>יישלחו פרטים נוספים בסמוך למועד האירוע</li>
+<li>תתבצע בדיקה טכנית של זמינות</li>
+<li>יימסר מידע לגבי מיקום, שעות והנחיות כלליות</li>
+</ul>
+<p>בשל רגישות האירוע, פרטים מלאים נמסרים אך ורק למאושרי השתתפות.</p>
+
+<p>אם קיבלת הודעה זו – סימן שאתה חלק מקבוצה מצומצמת שנבחרה להשתתף ביוזמה ייחודית. אנו ממליצים לעיין במידע בעיון ולאשר הגעה במידה והנך מעוניין להשתתף.</p>`
+},
+en:{
+title:"Additional Information About the Special Event",
+text:`<p>Welcome to Football Netanya's Special Invitation Program.</p>
+<p>Football Netanya is pleased to invite you to take part in a unique initiative designed for players, fans, and participants who have been involved in previous official or semi-official football activities.</p>
+<p>This is a special event, held on limited dates throughout the year, aimed at connecting the community, players, and the next generation of local football – within a professional, supervised environment, not open to the general public.</p>
+
+<h2>What is the Special Invitation Program?</h2>
+<p>The program is designed to identify participants with a background, interest, or prior involvement in football and give them the opportunity to participate in a high-profile unique event.</p>
+<p>The event includes:</p>
+<ul>
+<li>Special match not open to the public</li>
+<li>Presence of professional personnel from the field</li>
+<li>Internal media coverage</li>
+<li>An extraordinary participation experience that is not part of regular games</li>
+</ul>
+
+<h2>How is the selection process conducted?</h2>
+<p>Throughout the year, Football Netanya’s system conducts periodic scans based on existing data, including:</p>
+<ul>
+<li>Previous participation in football events</li>
+<li>Involvement in community sports activities</li>
+<li>Previous registration for events or related frameworks</li>
+</ul>
+<p>Selection is automatic and fair, without manual intervention, from a limited pool of relevant candidates only.</p>
+
+<h2>Why were you chosen?</h2>
+<p>Your selection indicates that your profile matches the criteria of the upcoming event. It is not a public lottery but based on proven prior activity and interest in the field.</p>
+<p>Important:</p>
+<ul>
+<li>Selection does not indicate future commitment</li>
+<li>Participation is optional</li>
+<li>You can decline the invitation without any consequences</li>
+</ul>
+
+<h2>What to expect after confirming attendance?</h2>
+<p>After confirming attendance:</p>
+<ul>
+<li>Further details will be sent close to the event date</li>
+<li>A technical availability check will be performed</li>
+<li>Information regarding location, time, and general guidelines will be provided</li>
+</ul>
+<p>Due to the sensitivity of the event, full details are provided only to confirmed participants.</p>
+
+<p>If you received this message – it means you are part of a small group chosen to participate in this unique initiative. We recommend reviewing the information carefully and confirming attendance if you wish to participate.</p>`
+},
+fr:{
+title:"Informations supplémentaires sur l'événement spécial",
+text:`<p>Bienvenue dans le programme d'invitations spéciales de Football Netanya.</p>
+<p>Football Netanya est heureux de vous inviter à participer à une initiative unique destinée aux joueurs, fans et participants ayant été impliqués dans des activités footballistiques officielles ou semi-officielles précédemment.</p>
+<p>Il s'agit d'un événement spécial, organisé à des dates limitées tout au long de l'année, visant à connecter la communauté, les joueurs et la prochaine génération de football local – dans un cadre professionnel, supervisé et non ouvert au grand public.</p>
+
+<h2>Quel est le programme d'invitation spéciale ?</h2>
+<p>Le programme vise à identifier les participants ayant un intérêt, une expérience ou un engagement préalable dans le domaine du football et à leur offrir l'opportunité de prendre part à un événement unique à forte visibilité.</p>
+<p>L'événement comprend :</p>
+<ul>
+<li>Match spécial non ouvert au public</li>
+<li>Présence de professionnels du domaine</li>
+<li>Couverture médiatique interne</li>
+<li>Expérience de participation exceptionnelle non réalisée dans le cadre de matchs réguliers</li>
+</ul>
+
+<h2>Comment se déroule le processus de sélection ?</h2>
+<p>Tout au long de l'année, le système de Football Netanya effectue des scans périodiques basés sur des données existantes, incluant :</p>
+<ul>
+<li>Participation précédente à des événements de football</li>
+<li>Engagement dans des activités sportives communautaires</li>
+<li>Inscriptions précédentes à des événements ou cadres associés</li>
+</ul>
+<p>La sélection est automatique et équitable, sans intervention manuelle, parmi un pool limité de candidats pertinents seulement.</p>
+
+<h2>Pourquoi avez-vous été choisi ?</h2>
+<p>Votre sélection indique que votre profil correspond aux critères de l'événement à venir. Il ne s'agit pas d'une loterie publique, mais d'une correspondance basée sur une activité et un intérêt antérieurs prouvés.</p>
+<p>Important :</p>
+<ul>
+<li>La sélection n'indique pas d'engagement futur</li>
+<li>La participation est facultative</li>
+<li>Vous pouvez refuser l'invitation sans aucune conséquence</li>
+</ul>
+
+<h2>Que se passe-t-il après la confirmation de participation ?</h2>
+<p>Après confirmation :</p>
+<ul>
+<li>Des détails supplémentaires seront envoyés à l'approche de l'événement</li>
+<li>Un contrôle technique de disponibilité sera effectué</li>
+<li>Les informations concernant le lieu, les horaires et les directives générales seront fournies</li>
+</ul>
+<p>En raison de la sensibilité de l'événement, les détails complets ne sont fournis qu'aux participants confirmés.</p>
+
+<p>Si vous avez reçu ce message, cela signifie que vous faites partie d'un petit groupe choisi pour participer à cette initiative unique. Nous vous recommandons de consulter les informations attentivement et de confirmer votre participation si vous souhaitez y assister.</p>`
+},
+ar:{
+title:"معلومات إضافية عن الحدث الخاص",
+text:`<p>مرحبًا بك في برنامج الدعوات الخاصة لنادي كرة القدم نتانيا.</p>
+<p>يسر نادي كرة القدم نتانيا دعوتك للمشاركة في مبادرة فريدة مصممة للاعبين، المشجعين، والمشاركين الذين شاركوا سابقًا في أنشطة كرة القدم الرسمية أو شبه الرسمية.</p>
+<p>هذا حدث خاص، يُعقد في تواريخ محدودة خلال السنة، ويهدف إلى ربط المجتمع، اللاعبين، والجيل القادم من كرة القدم المحلية – ضمن بيئة احترافية، خاضعة للإشراف وغير مفتوحة للجمهور.</p>
+
+<h2>ما هو برنامج الدعوات الخاصة؟</h2>
+<p>تم تصميم البرنامج لتحديد المشاركين الذين لديهم خلفية، اهتمام، أو مشاركة سابقة في كرة القدم، ومنحهم فرصة للمشاركة في حدث فريد ذو شهرة عالية.</p>
+<p>يشمل الحدث:</p>
+<ul>
+<li>مباراة خاصة غير مفتوحة للجمهور</li>
+<li>وجود موظفين محترفين من المجال</li>
+<li>تغطية إعلامية داخلية</li>
+<li>تجربة مشاركة استثنائية غير موجودة في المباريات العادية</li>
+</ul>
+
+<h2>كيف يتم اختيار المشاركين؟</h2>
+<p>على مدار العام، يقوم نظام نادي كرة القدم نتانيا بإجراء مسوحات دورية بناءً على بيانات موجودة، تشمل:</p>
+<ul>
+<li>المشاركة السابقة في فعاليات كرة القدم</li>
+<li>الانخراط في أنشطة رياضية مجتمعية</li>
+<li>التسجيل السابق للفعاليات أو الأطر المرتبطة</li>
+</ul>
+<p>يتم الاختيار بشكل تلقائي وعادل، دون تدخل يدوي، من مجموعة محدودة من المرشحين المناسبين فقط.</p>
+
+<h2>لماذا تم اختيارك؟</h2>
+<p>اختيارك يشير إلى أن ملفك الشخصي يتوافق مع معايير الحدث القادم. لا يُعد هذا سحبًا عامًا، بل بناءً على النشاط السابق والاهتمام المثبت في المجال.</p>
+<p>مهم:</p>
+<ul>
+<li>الاختيار لا يدل على التزام مستقبلي</li>
+<li>المشاركة اختيارية</li>
+<li>يمكنك رفض الدعوة دون أي عواقب</li>
+</ul>
+
+<h2>ماذا يحدث بعد تأكيد الحضور؟</h2>
+<p>بعد تأكيد الحضور:</p>
+<ul>
+<li>سيتم إرسال تفاصيل إضافية قبل موعد الحدث</li>
+<li>سيتم إجراء فحص فني للتأكد من التوفر</li>
+<li>سيتم تزويدك بمعلومات حول الموقع، الأوقات، والإرشادات العامة</li>
+</ul>
+<p>نظرًا لحساسية الحدث، يتم تزويد التفاصيل الكاملة فقط للمشاركين المؤكدين.</p>
+
+<p>إذا تلقيت هذه الرسالة – فهذا يعني أنك جزء من مجموعة صغيرة مختارة للمشاركة في هذه المبادرة الفريدة. نوصيك بمراجعة المعلومات بعناية وتأكيد الحضور إذا كنت ترغب بالمشاركة.</p>`
+};
+
+function applyLang(l){
+  els.title.textContent=t[l].title;
+  els.text.innerHTML=t[l].text;
+  document.body.classList.toggle("rtl", t[l].rtl);
+}
+
+document.getElementById("lang").onchange=e=>applyLang(e.target.value);
+applyLang("he");
+</script>
+
+</body>
+</html>
