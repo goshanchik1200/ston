@@ -2,48 +2,82 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8">
-<title>הזמנה רשמית | כדורגל נתניה</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>כדורגל נתניה – הזמנה רשמית</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { margin:0; font-family:Arial, sans-serif; background:#e9eef3; }
-header {
-  background:#0b2a5b; color:#fff; padding:15px 25px;
-  display:flex; justify-content:space-between; align-items:center;
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#eef1f5;
+  color:#222;
 }
-.brand { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:bold; }
-.language select { padding:4px; font-size:13px; color:#000; }
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 28px;
+  background:#0b2a5b;
+  color:#fff;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:20px;
+  font-weight:700;
+}
+.lang-select select{
+  color:#000;
+  padding:6px 8px;
+}
+main{
+  max-width:920px;
+  margin:40px auto;
+  background:#fff;
+  padding:40px;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
+}
+.actions{
+  margin-top:28px;
+}
+button{
+  padding:12px 22px;
+  margin-right:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:6px;
+  background:#0b2a5b;
+  color:#fff;
+  cursor:pointer;
+  font-size:15px;
+}
+button:hover{background:#123b7a}
 
-.main {
-  max-width:800px; margin:50px auto; background:#fff; padding:40px;
-  box-shadow:0 0 20px rgba(0,0,0,.15);
+.loader{
+  margin-top:24px;
+  text-align:center;
+  display:none;
 }
-h1 { color:#0b2a5b; }
+.spinner{
+  width:40px;
+  height:40px;
+  border:4px solid #d8dbe2;
+  border-top:4px solid #0b2a5b;
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:0 auto 12px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.buttons { margin-top:30px; display:flex; gap:15px; flex-wrap:wrap; }
-button {
-  padding:12px 20px; font-size:15px; border:0; border-radius:4px; cursor:pointer;
-}
-.confirm { background:#0b2a5b; color:#fff; }
-.info { background:#e0e0e0; }
-.contact { background:#f5f5f5; }
-
-/* overlay + spinner */
-#overlay {
-  position:fixed; inset:0; background:rgba(0,0,0,.6);
-  display:none; align-items:center; justify-content:center; flex-direction:column;
-}
-.spinner {
-  width:48px; height:48px; border:5px solid #ddd; border-top-color:#0b2a5b;
-  border-radius:50%; animation:spin 1s linear infinite; margin-bottom:12px;
-}
-@keyframes spin { to { transform:rotate(360deg); } }
-
-/* info icon (NOT emoji) */
-.info-icon {
-  display:inline-flex; align-items:center; justify-content:center;
-  width:18px; height:18px; border:1.5px solid #333; border-radius:50%;
-  font-size:12px; font-weight:bold; margin-right:6px;
+.footer{
+  margin-top:60px;
+  padding:26px;
+  text-align:center;
+  font-size:13px;
+  color:#666;
+  background:#f4f6f9;
 }
 </style>
 </head>
@@ -52,8 +86,8 @@ button {
 
 <header>
   <div class="brand">⚽ כדורגל נתניה</div>
-  <div class="language">
-    <select onchange="changeLang(this.value)">
+  <div class="lang-select">
+    <select id="lang">
       <option value="he">עברית</option>
       <option value="en">English</option>
       <option value="fr">Français</option>
@@ -62,50 +96,96 @@ button {
   </div>
 </header>
 
-<div class="main" id="content">
-  <h1>הזמנה לאירוע כדורגל מיוחד</h1>
-  <p>
-    נבחרת להשתתף באירוע ייחודי של כדורגל נתניה.
-    מספר המקומות מוגבל וההשתתפות מותנית באישור מוקדם.
-  </p>
+<main>
+  <h1 id="title"></h1>
+  <p id="desc"></p>
 
-  <div class="buttons">
-    <button class="confirm" onclick="playSound()">אישור השתתפות</button>
-    <button class="info" onclick="location.href='info.html'">
-      <span class="info-icon">i</span>מידע נוסף
-    </button>
-    <button class="contact" onclick="contact()">צור קשר</button>
+  <div class="actions">
+    <button id="confirmBtn"></button>
+    <button id="contactBtn"></button>
+    <button id="infoBtn">&#8505; מידע נוסף</button>
   </div>
-</div>
 
-<div id="overlay">
-  <div class="spinner"></div>
-  <div style="color:#fff">מבצע אימות…</div>
-</div>
+  <div class="loader" id="loader">
+    <div class="spinner"></div>
+    <div id="loaderText"></div>
+  </div>
+</main>
 
-<audio id="sound" src="ston.mp3"></audio>
+<footer class="footer">
+© 2026 Netanya Football Organization. All rights reserved.
+</footer>
 
 <script>
-function playSound(){ document.getElementById("sound").play(); }
+const texts = {
+  he:{
+    title:"הזמנה רשמית לאירוע כדורגל מיוחד",
+    desc:"נבחרת להשתתף באירוע כדורגל ייחודי המאורגן על ידי ארגון כדורגל נתניה.",
+    confirm:"אישור השתתפות",
+    contact:"צור קשר",
+    loading:"טוען נתונים, אנא המתן…",
+    error:"אירעה שגיאה זמנית. אנא נסה שוב מאוחר יותר."
+  },
+  en:{
+    title:"Official Invitation to a Special Football Event",
+    desc:"You have been selected to participate in a unique football event organized by Netanya Football.",
+    confirm:"Confirm Participation",
+    contact:"Contact Us",
+    loading:"Loading data, please wait…",
+    error:"A temporary error occurred. Please try again later."
+  },
+  fr:{
+    title:"Invitation officielle à un événement de football spécial",
+    desc:"Vous avez été sélectionné pour participer à un événement de football unique organisé par Netanya Football.",
+    confirm:"Confirmer la participation",
+    contact:"Nous contacter",
+    loading:"Chargement des données, veuillez patienter…",
+    error:"Une erreur temporaire s'est produite. Veuillez réessayer plus tard."
+  },
+  ar:{
+    title:"دعوة رسمية لحدث كرة قدم خاص",
+    desc:"تم اختيارك للمشاركة في حدث كرة قدم مميز تنظمه مؤسسة كرة القدم في نتانيا.",
+    confirm:"تأكيد المشاركة",
+    contact:"اتصل بنا",
+    loading:"جاري تحميل البيانات، يرجى الانتظار…",
+    error:"حدث خطأ مؤقت. يرجى المحاولة لاحقًا."
+  }
+};
 
-function contact(){
-  const o=document.getElementById("overlay");
-  o.style.display="flex";
-  setTimeout(()=>{ o.querySelector('div:last-child').innerText="שגיאה זמנית. נסה שוב מאוחר יותר."; },2500);
-  setTimeout(()=>{ o.style.display="none"; o.querySelector('div:last-child').innerText="מבצע אימות…"; },5000);
+let currentLang = localStorage.getItem("lang") || "he";
+
+function applyLang(lang){
+  currentLang = lang;
+  localStorage.setItem("lang", lang);
+  document.documentElement.lang = lang;
+  document.getElementById("title").innerText = texts[lang].title;
+  document.getElementById("desc").innerText = texts[lang].desc;
+  document.getElementById("confirmBtn").innerText = texts[lang].confirm;
+  document.getElementById("contactBtn").innerText = texts[lang].contact;
+  document.getElementById("loaderText").innerText = "";
+  document.getElementById("lang").value = lang;
 }
 
-const translations={
-en:`<h1>Official Football Event Invitation</h1>
-<p>You have been selected to participate in a special football event.</p>
-<div class="buttons">
-<button class="confirm" onclick="playSound()">Confirm Participation</button>
-<button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>More Information</button>
-<button class="contact" onclick="contact()">Contact Us</button>
-</div>`,
-fr:`<h1>Invitation officielle à un événement de football</h1>
-<p>Vous avez été sélectionné pour participer à un événement spécial.</p>
-<div class="buttons">
-<button class="confirm" onclick="playSound()">Confirmer</button>
-<button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>Plus d'informations</button>
-<
+applyLang(currentLang);
+
+document.getElementById("lang").addEventListener("change", e=>{
+  applyLang(e.target.value);
+});
+
+document.getElementById("infoBtn").addEventListener("click", ()=>{
+  window.location.href = "info.html";
+});
+
+document.getElementById("contactBtn").addEventListener("click", ()=>{
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+  document.getElementById("loaderText").innerText = texts[currentLang].loading;
+  setTimeout(()=>{
+    alert(texts[currentLang].error);
+    loader.style.display = "none";
+  }, 2600);
+});
+</script>
+
+</body>
+</html>
