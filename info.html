@@ -3,28 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <title>מידע נוסף – כדורגל נתניה</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
 body{
-  font-family:Arial, sans-serif;
-  background:#eef1f5;
   margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:#eef1f5;
 }
-
 main{
-  max-width:900px;
+  max-width:920px;
   margin:40px auto;
-  background:white;
+  background:#fff;
   padding:40px;
-  border-radius:8px;
+  border-radius:10px;
+  box-shadow:0 12px 30px rgba(0,0,0,.12);
 }
-
-a{
+.back{
   display:inline-block;
-  margin-bottom:20px;
-  text-decoration:none;
+  margin-bottom:24px;
   color:#0b2a5b;
-  font-weight:bold;
+  text-decoration:none;
+  font-weight:700;
 }
 </style>
 </head>
@@ -32,35 +32,60 @@ a{
 <body>
 
 <main>
-<a href="index.html">← חזרה להזמנה</a>
-<div id="content"></div>
+  <a class="back" href="index.html">← חזרה להזמנה</a>
+  <div id="content"></div>
 </main>
 
 <script>
-const translations = {
-he:`<h1>הזמנה לאירוע כדורגל ייחודי</h1>
+const content = {
+he:`
+<h1>הזמנה להשתתפות באירוע כדורגל ייחודי</h1>
 <p>ארגון כדורגל נתניה מקיים מעת לעת אירועי כדורגל מיוחדים...</p>
-<p><b>איך זה עובד?</b><br>מערכת אוטומטית בוחרת משתתפים...</p>
-<p><b>למה נבחרת?</b><br>השתתפת בעבר בפעילות כדורגל...</p>`,
+<p><b>איך זה עובד?</b><br>
+מערכת בחירה אוטומטית מנתחת נתוני פעילות קודמים...</p>
+<p><b>למה נבחרת?</b><br>
+נמצאת כמתאים להשתתפות באירוע ייחודי זה...</p>
+<p><b>מה צפוי באירוע?</b><br>
+משחק חגיגי, סיקור מדיה, ואפשרות לחשיפה ציבורית...</p>
+`,
 
-en:`<h1>Invitation to a Unique Football Event</h1>
-<p>Netanya Football Organization periodically holds special events...</p>
-<p><b>How does it work?</b><br>An automated system selects participants...</p>
-<p><b>Why were you selected?</b><br>You previously participated...</p>`,
+en:`
+<h1>Invitation to Participate in a Unique Football Event</h1>
+<p>The Netanya Football Organization periodically organizes special football events...</p>
+<p><b>How does it work?</b><br>
+An automated selection system reviews prior activity...</p>
+<p><b>Why were you selected?</b><br>
+Your profile matched the criteria for this special event...</p>
+<p><b>What should you expect?</b><br>
+A ceremonial match, media coverage, and public exposure...</p>
+`,
 
-fr:`<h1>Invitation à un événement de football unique</h1>
-<p>L'organisation de football de Netanya organise périodiquement...</p>
-<p><b>Comment ça fonctionne ?</b><br>Un système automatisé sélectionne...</p>
-<p><b>Pourquoi avez-vous été choisi ?</b><br>Vous avez participé...</p>`,
+fr:`
+<h1>Invitation à participer à un événement de football unique</h1>
+<p>L'organisation de football de Netanya organise régulièrement des événements spéciaux...</p>
+<p><b>Comment cela fonctionne-t-il ?</b><br>
+Un système automatisé analyse les données précédentes...</p>
+<p><b>Pourquoi avez-vous été choisi ?</b><br>
+Votre profil correspond aux critères définis...</p>
+<p><b>À quoi s'attendre ?</b><br>
+Un match officiel, une couverture médiatique et une visibilité publique...</p>
+`,
 
-ar:`<h1>دعوة لحدث كرة قدم مميز</h1>
-<p>تنظم مؤسسة كرة القدم في نتانيا فعاليات خاصة...</p>
-<p><b>كيف يعمل ذلك؟</b><br>نظام آلي يختار المشاركين...</p>
-<p><b>لماذا تم اختيارك؟</b><br>شاركت سابقًا...</p>`
+ar:`
+<h1>دعوة للمشاركة في حدث كرة قدم مميز</h1>
+<p>تنظم مؤسسة كرة القدم في نتانيا فعاليات خاصة بشكل دوري...</p>
+<p><b>كيف يعمل النظام؟</b><br>
+يقوم نظام آلي بمراجعة بيانات المشاركة السابقة...</p>
+<p><b>لماذا تم اختيارك؟</b><br>
+تم تحديد ملفك على أنه مناسب لهذا الحدث...</p>
+<p><b>ماذا تتوقع؟</b><br>
+مباراة رسمية، تغطية إعلامية، وفرصة للظهور العام...</p>
+`
 };
 
 const lang = localStorage.getItem("lang") || "he";
-document.getElementById("content").innerHTML = translations[lang];
+document.documentElement.lang = lang;
+document.getElementById("content").innerHTML = content[lang];
 </script>
 
 </body>
