@@ -6,88 +6,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #e9eef3;
-}
-
+body { margin:0; font-family:Arial, sans-serif; background:#e9eef3; }
 header {
-  background: #0b2a5b;
-  color: white;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  background:#0b2a5b; color:#fff; padding:15px 25px;
+  display:flex; justify-content:space-between; align-items:center;
 }
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand span {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.language select {
-  padding: 4px;
-  font-size: 13px;
-  color: black;
-}
+.brand { display:flex; align-items:center; gap:10px; font-size:20px; font-weight:bold; }
+.language select { padding:4px; font-size:13px; color:#000; }
 
 .main {
-  max-width: 800px;
-  margin: 50px auto;
-  background: white;
-  padding: 40px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+  max-width:800px; margin:50px auto; background:#fff; padding:40px;
+  box-shadow:0 0 20px rgba(0,0,0,.15);
 }
+h1 { color:#0b2a5b; }
 
-h1 {
-  color: #0b2a5b;
-}
-
-.buttons {
-  margin-top: 30px;
-  display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
+.buttons { margin-top:30px; display:flex; gap:15px; flex-wrap:wrap; }
 button {
-  padding: 12px 20px;
-  font-size: 15px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  padding:12px 20px; font-size:15px; border:0; border-radius:4px; cursor:pointer;
 }
+.confirm { background:#0b2a5b; color:#fff; }
+.info { background:#e0e0e0; }
+.contact { background:#f5f5f5; }
 
-.confirm {
-  background: #0b2a5b;
-  color: white;
-}
-
-.info {
-  background: #e0e0e0;
-}
-
-.contact {
-  background: #f5f5f5;
-}
-
+/* overlay + spinner */
 #overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: none;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 18px;
-  flex-direction: column;
+  position:fixed; inset:0; background:rgba(0,0,0,.6);
+  display:none; align-items:center; justify-content:center; flex-direction:column;
+}
+.spinner {
+  width:48px; height:48px; border:5px solid #ddd; border-top-color:#0b2a5b;
+  border-radius:50%; animation:spin 1s linear infinite; margin-bottom:12px;
+}
+@keyframes spin { to { transform:rotate(360deg); } }
+
+/* info icon (NOT emoji) */
+.info-icon {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:18px; height:18px; border:1.5px solid #333; border-radius:50%;
+  font-size:12px; font-weight:bold; margin-right:6px;
 }
 </style>
 </head>
@@ -95,10 +51,7 @@ button {
 <body>
 
 <header>
-  <div class="brand">
-    ⚽ <span>כדורגל נתניה</span>
-  </div>
-
+  <div class="brand">⚽ כדורגל נתניה</div>
   <div class="language">
     <select onchange="changeLang(this.value)">
       <option value="he">עברית</option>
@@ -112,79 +65,63 @@ button {
 <div class="main" id="content">
   <h1>הזמנה לאירוע כדורגל מיוחד</h1>
   <p>
-  נבחרת להשתתף באירוע ייחודי של כדורגל נתניה.
-  מספר המקומות מוגבל וההשתתפות מותנית באישור מוקדם.
+    נבחרת להשתתף באירוע ייחודי של כדורגל נתניה.
+    מספר המקומות מוגבל וההשתתפות מותנית באישור מוקדם.
   </p>
 
   <div class="buttons">
     <button class="confirm" onclick="playSound()">אישור השתתפות</button>
-    <button class="info" onclick="location.href='info.html'">ℹ️ מידע נוסף</button>
+    <button class="info" onclick="location.href='info.html'">
+      <span class="info-icon">i</span>מידע נוסף
+    </button>
     <button class="contact" onclick="contact()">צור קשר</button>
   </div>
 </div>
 
 <div id="overlay">
-  <div id="overlayText">טוען...</div>
+  <div class="spinner"></div>
+  <div style="color:#fff">מבצע אימות…</div>
 </div>
 
 <audio id="sound" src="ston.mp3"></audio>
 
 <script>
-function playSound() {
-  document.getElementById("sound").play();
+function playSound(){ document.getElementById("sound").play(); }
+
+function contact(){
+  const o=document.getElementById("overlay");
+  o.style.display="flex";
+  setTimeout(()=>{ o.querySelector('div:last-child').innerText="שגיאה זמנית. נסה שוב מאוחר יותר."; },2500);
+  setTimeout(()=>{ o.style.display="none"; o.querySelector('div:last-child').innerText="מבצע אימות…"; },5000);
 }
 
-function contact() {
-  const overlay = document.getElementById("overlay");
-  const text = document.getElementById("overlayText");
-
-  overlay.style.display = "flex";
-  text.innerText = "מתחבר לשרתים...";
-
-  setTimeout(() => {
-    text.innerText = "שגיאה זמנית. נסה שוב מאוחר יותר.";
-  }, 2500);
-
-  setTimeout(() => {
-    overlay.style.display = "none";
-  }, 5000);
-}
-
-const translations = {
-  en: `
-    <h1>Official Football Event Invitation</h1>
-    <p>You have been selected to participate in a special football event.</p>
-    <div class="buttons">
-      <button class="confirm" onclick="playSound()">Confirm Participation</button>
-      <button class="info" onclick="location.href='info.html'">ℹ️ More Information</button>
-      <button class="contact" onclick="contact()">Contact Us</button>
-    </div>
-  `,
-  fr: `
-    <h1>Invitation officielle à un événement de football</h1>
-    <p>Vous avez été sélectionné pour participer à un événement spécial.</p>
-    <div class="buttons">
-      <button class="confirm" onclick="playSound()">Confirmer</button>
-      <button class="info" onclick="location.href='info.html'">ℹ️ Plus d'informations</button>
-      <button class="contact" onclick="contact()">Contact</button>
-    </div>
-  `,
-  ar: `
-    <h1>دعوة رسمية لحدث كرة قدم</h1>
-    <p>تم اختيارك للمشاركة في حدث خاص.</p>
-    <div class="buttons">
-      <button class="confirm" onclick="playSound()">تأكيد المشاركة</button>
-      <button class="info" onclick="location.href='info.html'">ℹ️ معلومات إضافية</button>
-      <button class="contact" onclick="contact()">اتصل بنا</button>
-    </div>
-  `
+const translations={
+en:`<h1>Official Football Event Invitation</h1>
+<p>You have been selected to participate in a special football event.</p>
+<div class="buttons">
+<button class="confirm" onclick="playSound()">Confirm Participation</button>
+<button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>More Information</button>
+<button class="contact" onclick="contact()">Contact Us</button>
+</div>`,
+fr:`<h1>Invitation officielle à un événement de football</h1>
+<p>Vous avez été sélectionné pour participer à un événement spécial.</p>
+<div class="buttons">
+<button class="confirm" onclick="playSound()">Confirmer</button>
+<button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>Plus d'informations</button>
+<button class="contact" onclick="contact()">Contact</button>
+</div>`,
+ar:`<h1>دعوة رسمية لحدث كرة قدم</h1>
+<p>تم اختيارك للمشاركة في حدث خاص.</p>
+<div class="buttons">
+<button class="confirm" onclick="playSound()">تأكيد المشاركة</button>
+<button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>معلومات إضافية</button>
+<button class="contact" onclick="contact()">اتصل بنا</button>
+</div>`
 };
-
-function changeLang(lang) {
-  if (lang === "he") location.reload();
-  else document.getElementById("content").innerHTML = translations[lang];
-}
+function changeLang(l){ if(l==="he") location.reload(); else document.getElementById("content").innerHTML=translations[l]; }
 </script>
 
 </body>
 </html>
+
+
