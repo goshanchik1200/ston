@@ -2,90 +2,70 @@
 <html lang="he">
 <head>
 <meta charset="UTF-8">
-<title>כדורגל נתניה – הזמנה רשמית</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Football Event Invitation</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, Helvetica, sans-serif;
-  background:#eef1f5;
-}
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 28px;
-  background:#0b2a5b;
-  color:white;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:20px;
-  font-weight:700;
-}
-select{padding:6px}
-
-main{
-  max-width:900px;
-  margin:50px auto;
-  background:white;
-  padding:40px;
-  border-radius:10px;
-  box-shadow:0 10px 30px rgba(0,0,0,.15);
-  position:relative;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
 }
 
-.buttons button{
-  padding:12px 22px;
-  margin:10px 10px 0 0;
-  border:none;
-  border-radius:6px;
-  background:#0b2a5b;
-  color:white;
-  cursor:pointer;
-  font-size:15px;
-}
-.buttons button:hover{background:#123b7a}
-
-.overlay{
-  position:absolute;
-  inset:0;
-  background:rgba(255,255,255,.92);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
+header {
+  background: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.spinner{
-  width:44px;
-  height:44px;
-  border:4px solid #ddd;
-  border-top:4px solid #0b2a5b;
-  border-radius:50%;
-  animation:spin 1s linear infinite;
-  margin-bottom:16px;
+.logo {
+  font-size: 22px;
+  font-weight: bold;
 }
 
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.error{
-  color:#a00;
-  margin-top:12px;
-  font-size:14px;
+.contact-btn {
+  margin-top: 10px;
 }
 
-footer{
-  text-align:center;
-  font-size:13px;
-  color:#666;
-  padding:25px;
-  background:#f4f6f9;
-  margin-top:60px;
+.lang-select {
+  font-size: 14px;
+}
+
+main {
+  max-width: 900px;
+  margin: 40px auto;
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+}
+
+button {
+  padding: 14px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+.actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
 }
 </style>
 </head>
@@ -93,114 +73,57 @@ footer{
 <body>
 
 <header>
-  <div class="brand">⚽ כדורגל נתניה</div>
-  <select id="langSelect">
-    <option value="he">עברית</option>
-    <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="ar">العربية</option>
+  <div>
+    <div class="logo">Football Global</div>
+    <div class="contact-btn">
+      <button onclick="contact()">צור קשר</button>
+    </div>
+  </div>
+
+  <select class="lang-select">
+    <option>עברית</option>
+    <option>English</option>
+    <option>Français</option>
+    <option>العربية</option>
   </select>
 </header>
 
 <main>
-  <h1 id="title"></h1>
-  <p id="desc"></p>
+  <h1>הוזמנת לאירוע כדורגל מיוחד</h1>
 
-  <div class="buttons">
-    <button id="joinBtn"></button>
-    <button id="contactBtn"></button>
-    <button id="infoBtn">&#8505; מידע נוסף</button>
+  <p>
+    נבחרת להשתתף באירוע ייחודי המאורגן על ידי Football Global.
+  </p>
+
+  <div class="actions">
+    <button onclick="playSound()">אישור השתתפות</button>
+    <button onclick="goInfo()">&#8505; מידע נוסף</button>
   </div>
 
-  <div class="overlay" id="overlay">
-    <div class="spinner"></div>
-    <div id="overlayText"></div>
-    <div class="error" id="overlayError"></div>
-  </div>
+  <!-- АУДИО -->
+  <audio id="stonAudio" src="ston.mp3"></audio>
+
+  <footer>
+    © 2026 Football Global. All rights reserved.
+  </footer>
 </main>
 
-<footer>
-© 2026 Netanya Football Organization. All rights reserved.
-</footer>
-
 <script>
-const T={
-he:{
- title:"הזמנה רשמית לאירוע כדורגל מיוחד",
- desc:"נבחרת להשתתף באירוע כדורגל ייחודי המאורגן על ידי ארגון כדורגל נתניה.",
- join:"אישור השתתפות",
- contact:"צור קשר",
- loading:"מעבד בקשה, אנא המתן…",
- error:"המערכת אינה זמינה כעת. אנא נסה שוב מאוחר יותר.",
- joined:"השתתפותך נרשמה בהצלחה."
-},
-en:{
- title:"Official Invitation to a Special Football Event",
- desc:"You have been selected to participate in a unique football event organized by Netanya Football.",
- join:"Confirm Participation",
- contact:"Contact Us",
- loading:"Processing request, please wait…",
- error:"The system is currently unavailable. Please try again later.",
- joined:"Your participation has been successfully registered."
-},
-fr:{
- title:"Invitation officielle à un événement de football spécial",
- desc:"Vous avez été sélectionné pour participer à un événement de football unique organisé par Netanya Football.",
- join:"Confirmer la participation",
- contact:"Nous contacter",
- loading:"Traitement de la demande, veuillez patienter…",
- error:"Le système est momentanément indisponible.",
- joined:"Votre participation a été enregistrée avec succès."
-},
-ar:{
- title:"دعوة رسمية لحدث كرة قدم خاص",
- desc:"تم اختيارك للمشاركة في حدث كرة قدم مميز تنظمه مؤسسة كرة القدم في نتانيا.",
- join:"تأكيد المشاركة",
- contact:"اتصل بنا",
- loading:"جاري معالجة الطلب، يرجى الانتظار…",
- error:"النظام غير متاح حاليًا. يرجى المحاولة لاحقًا.",
- joined:"تم تسجيل مشاركتك بنجاح."
+function playSound() {
+  const audio = document.getElementById("stonAudio");
+  audio.currentTime = 0;
+  audio.play().catch(() => {
+    alert("לא ניתן להפעיל את קובץ השמע. ודא שהקובץ ston.mp3 נמצא בתיקייה.");
+  });
 }
-};
 
-let lang=localStorage.getItem("lang")||"he";
-const o=document.getElementById("overlay");
-
-function apply(){
- document.documentElement.lang=lang;
- langSelect.value=lang;
- title.innerText=T[lang].title;
- desc.innerText=T[lang].desc;
- joinBtn.innerText=T[lang].join;
- contactBtn.innerText=T[lang].contact;
+function goInfo() {
+  window.location.href = "info.html";
 }
-apply();
 
-langSelect.onchange=e=>{
- lang=e.target.value;
- localStorage.setItem("lang",lang);
- apply();
-};
-
-infoBtn.onclick=()=>location.href="info.html";
-
-joinBtn.onclick=()=>{
- o.style.display="flex";
- overlayText.innerText=T[lang].loading;
- overlayError.innerText="";
- setTimeout(()=>{
-   overlayText.innerText=T[lang].joined;
- },2000);
-};
-
-contactBtn.onclick=()=>{
- o.style.display="flex";
- overlayText.innerText=T[lang].loading;
- overlayError.innerText="";
- setTimeout(()=>{
-   overlayError.innerText=T[lang].error;
- },2300);
-};
+function contact() {
+  alert("שירות זה אינו זמין כרגע.");
+}
 </script>
 
 </body>
