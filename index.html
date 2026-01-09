@@ -83,48 +83,4 @@ footer {
   <select class="lang-select">
     <option>עברית</option>
     <option>English</option>
-    <option>Français</option>
-    <option>العربية</option>
-  </select>
-</header>
-
-<main>
-  <h1>הוזמנת לאירוע כדורגל מיוחד</h1>
-
-  <p>
-    נבחרת להשתתף באירוע ייחודי המאורגן על ידי Football Global.
-  </p>
-
-  <div class="actions">
-    <button onclick="playSound()">אישור השתתפות</button>
-    <button onclick="goInfo()">&#8505; מידע נוסף</button>
-  </div>
-
-  <!-- АУДИО -->
-  <audio id="stonAudio" src="ston.mp3"></audio>
-
-  <footer>
-    © 2026 Football Global. All rights reserved.
-  </footer>
-</main>
-
-<script>
-function playSound() {
-  const audio = document.getElementById("stonAudio");
-  audio.currentTime = 0;
-  audio.play().catch(() => {
-    alert("לא ניתן להפעיל את קובץ השמע. ודא שהקובץ ston.mp3 נמצא בתיקייה.");
-  });
-}
-
-function goInfo() {
-  window.location.href = "info.html";
-}
-
-function contact() {
-  alert("שירות זה אינו זמין כרגע.");
-}
-</script>
-
-</body>
-</html>
+    <opt
