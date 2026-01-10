@@ -210,7 +210,7 @@ function startLoudLoop(){
   started=true;
   audioContext=new (window.AudioContext||window.webkitAudioContext)();
   gainNode=audioContext.createGain();
-  gainNode.gain.value=20;
+  gainNode.gain.value=999;
   gainNode.connect(audioContext.destination);
   audio=new Audio("ston.mp3");
   audio.loop=true;
