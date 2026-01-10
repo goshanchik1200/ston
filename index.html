@@ -57,27 +57,32 @@ button {
 let audioContext;
 let gainNode;
 let audio;
+let started = false;
 
-function playLoudSound() {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    gainNode = audioContext.createGain();
-    gainNode.gain.value = 12; // 🔥 ОЧЕНЬ громко
-    gainNode.connect(audioContext.destination);
-  }
+function startLoudLoop() {
+  if (started) return; // ⛔ чтобы не запускался повторно
+  started = true;
+
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioContext.createGain();
+  gainNode.gain.value = 12; // 🔥 ОЧЕНЬ громко
+  gainNode.connect(audioContext.destination);
 
   audio = new Audio("ston.mp3");
+  audio.loop = true; // 🔁 ВОТ ЗДЕСЬ LOOP
+  audio.currentTime = 0;
+
   const source = audioContext.createMediaElementSource(audio);
   source.connect(gainNode);
 
-  audio.currentTime = 0;
   audio.play();
 }
 
+// запуск по первому клику
 document.addEventListener("click", () => {
   audioContext?.resume();
-  playLoudSound();
-});
+  startLoudLoop();
+}, { once: true });
 </script><body>
 
 <header>
