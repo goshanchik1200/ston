@@ -103,7 +103,7 @@ html[dir="ltr"] li {
 
 <div class="container" id="content">
 
-<a class="back" href="index.html"><span>←</span> חזרה להזמנה</a>
+<a class="back" href="#" onclick="goBack()"><span>←</span> חזרה להזמנה</a>
 
 <h1>תוכנית ההזמנות המיוחדות – מידע מלא</h1>
 
@@ -160,8 +160,12 @@ html[dir="ltr"] li {
 <div class="footer">© 2026 Netanya Football Organization</div>
 
 <script>
+function goBack(){
+  window.location.href = "index.html";
+}
+
 const translations={
-en:`<a class="back" href="index.html"><span>←</span> Back to invitation</a>
+en:`<a class="back" href="#" onclick="goBack()"><span>←</span> Back to invitation</a>
 <h1>Special Invitation Program – Full Information</h1>
 <p>Netanya Football operates a selective invitation initiative throughout the year.</p>
 <h2>Program background</h2>
@@ -178,7 +182,7 @@ en:`<a class="back" href="index.html"><span>←</span> Back to invitation</a>
 <p>Your profile matched the event criteria.</p>
 <h2>After confirmation</h2>
 <p>Additional details will be sent closer to the date.</p>`,
-fr:`<a class="back" href="index.html"><span>←</span> Retour à l'invitation</a>
+fr:`<a class="back" href="#" onclick="goBack()"><span>←</span> Retour à l'invitation</a>
 <h1>Programme d'invitation spéciale – Informations complètes</h1>
 <p>Netanya Football organise une initiative sélective.</p>
 <h2>Contexte</h2>
@@ -190,7 +194,7 @@ fr:`<a class="back" href="index.html"><span>←</span> Retour à l'invitation</a
 </ul>
 <h2>Sélection</h2>
 <p>Sélection automatique basée sur les données.</p>`,
-ar:`<a class="back" href="index.html"><span>←</span> العودة إلى الدعوة</a>
+ar:`<a class="back" href="#" onclick="goBack()"><span>←</span> العودة إلى الدعوة</a>
 <h1>برنامج الدعوة الخاصة – معلومات كاملة</h1>
 <p>تنظم كرة قدم نتانيا مبادرة انتقائية.</p>
 <h2>الخلفية</h2>
