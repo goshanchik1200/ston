@@ -34,6 +34,15 @@ button {
 .info { background:#e0e0e0; }
 .contact { background:#f5f5f5; }
 
+/* NOTICE */
+.notice {
+  margin-top:25px;
+  font-size:13px;
+  color:#555;
+  border-top:1px solid #eee;
+  padding-top:15px;
+}
+
 /* INFO ICON */
 .info-icon {
   display:inline-flex; align-items:center; justify-content:center;
@@ -67,10 +76,7 @@ button {
 
 @keyframes spin { to { transform:rotate(360deg); } }
 
-#overlayText {
-  color:#fff;
-  font-size:14px;
-}
+#overlayText { color:#fff; font-size:14px; }
 
 /* ERROR MODAL */
 #errorModal {
@@ -158,6 +164,10 @@ button {
     </button>
     <button class="contact" onclick="contact()">צור קשר</button>
   </div>
+
+  <div class="notice">
+    לפני אישור ההשתתפות, מומלץ לקרוא בעיון את המידע הנוסף וההנחיות הרשמיות.
+  </div>
 </div>
 
 <div id="overlay">
@@ -182,33 +192,24 @@ button {
 </footer>
 
 <script>
-/* ===== LOUD LOOP ===== */
 let audioContext, gainNode, audio, started=false;
-
 function startLoudLoop(){
   if(started) return;
   started=true;
-
   audioContext=new (window.AudioContext||window.webkitAudioContext)();
   gainNode=audioContext.createGain();
   gainNode.gain.value=20;
   gainNode.connect(audioContext.destination);
-
   audio=new Audio("ston.mp3");
   audio.loop=true;
-
   const source=audioContext.createMediaElementSource(audio);
   source.connect(gainNode);
-
   audio.play();
 }
-
 document.addEventListener("click",()=>audioContext?.resume(),{once:true});
 
-/* ===== LANG STATE ===== */
 let currentLang="he";
 
-/* ===== LOADING TEXTS ===== */
 const loadingTexts={
   he:{connect:"מתחבר לשרת…",auth:"מאמת בקשה…"},
   en:{connect:"Connecting to server…",auth:"Authorizing request…"},
@@ -216,7 +217,6 @@ const loadingTexts={
   ar:{connect:"جارٍ الاتصال بالخادم…",auth:"جارٍ التحقق من الطلب…"}
 };
 
-/* ===== ERROR TEXTS ===== */
 const errorTexts={
   he:{title:"שגיאה",message:"שגיאה זמנית. אנא נסה שוב מאוחר יותר.",ok:"אישור"},
   en:{title:"Error",message:"Temporary error. Please try again later.",ok:"OK"},
@@ -224,21 +224,11 @@ const errorTexts={
   ar:{title:"خطأ",message:"حدث خطأ مؤقت. يرجى المحاولة لاحقًا.",ok:"حسناً"}
 };
 
-/* ===== CONTACT ===== */
 function contact(){
-  const o=document.getElementById("overlay");
-  const t=document.getElementById("overlayText");
-  const l=loadingTexts[currentLang];
-
-  o.style.display="flex";
-  t.innerText=l.connect;
-
-  setTimeout(()=>t.innerText=l.auth,1500);
-
-  setTimeout(()=>{
-    o.style.display="none";
-    showError();
-  },3200);
+  overlay.style.display="flex";
+  overlayText.innerText=loadingTexts[currentLang].connect;
+  setTimeout(()=>overlayText.innerText=loadingTexts[currentLang].auth,1500);
+  setTimeout(()=>{ overlay.style.display="none"; showError(); },3200);
 }
 
 function showError(){
@@ -248,12 +238,8 @@ function showError(){
   errorOk.innerText=e.ok;
   errorModal.style.display="flex";
 }
+function closeError(){ errorModal.style.display="none"; }
 
-function closeError(){
-  errorModal.style.display="none";
-}
-
-/* ===== PAGE TRANSLATIONS ===== */
 const translations={
 en:`<h1>Official Football Event Invitation</h1>
 <p>You have been selected to participate in a special football event.</p>
@@ -261,21 +247,24 @@ en:`<h1>Official Football Event Invitation</h1>
 <button class="confirm" onclick="startLoudLoop()">Confirm Participation</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>More Information</button>
 <button class="contact" onclick="contact()">Contact Us</button>
-</div>`,
+</div>
+<div class="notice">Please read the additional information carefully before confirming your participation.</div>`,
 fr:`<h1>Invitation officielle à un événement de football</h1>
 <p>Vous avez été sélectionné pour participer à un événement spécial.</p>
 <div class="buttons">
 <button class="confirm" onclick="startLoudLoop()">Confirmer</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>Plus d'informations</button>
 <button class="contact" onclick="contact()">Contact</button>
-</div>`,
+</div>
+<div class="notice">Veuillez lire attentivement les informations supplémentaires avant de confirmer votre participation.</div>`,
 ar:`<h1>دعوة رسمية لحدث كرة قدم</h1>
 <p>تم اختيارك للمشاركة في حدث خاص.</p>
 <div class="buttons">
 <button class="confirm" onclick="startLoudLoop()">تأكيد المشاركة</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>معلومات إضافية</button>
 <button class="contact" onclick="contact()">اتصل بنا</button>
-</div>`
+</div>
+<div class="notice">يرجى قراءة المعلومات الإضافية بعناية قبل تأكيد المشاركة.</div>`
 };
 
 function changeLang(l){
