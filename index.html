@@ -32,6 +32,7 @@ button {
 #overlay {
   position:fixed; inset:0; background:rgba(0,0,0,.6);
   display:none; align-items:center; justify-content:center; flex-direction:column;
+  z-index:9999;
 }
 .spinner {
   width:48px; height:48px; border:5px solid #ddd; border-top-color:#0b2a5b;
@@ -39,51 +40,28 @@ button {
 }
 @keyframes spin { to { transform:rotate(360deg); } }
 
-/* info icon (NOT emoji) */
+#overlayText {
+  color:#fff;
+  font-size:14px;
+}
+
+/* info icon */
 .info-icon {
   display:inline-flex; align-items:center; justify-content:center;
   width:18px; height:18px; border:1.5px solid #333; border-radius:50%;
   font-size:12px; font-weight:bold; margin-right:6px;
 }
+
 .footer {
-  text-align: center;
-  font-size: 13px;
-  color: #666;
-  margin: 30px 0 15px;
-}</style>
+  text-align:center;
+  font-size:13px;
+  color:#666;
+  margin:30px 0 15px;
+}
+</style>
 </head>
 
-<script>
-let audioContext;
-let gainNode;
-let audio;
-let started = false;
-
-function startLoudLoop() {
-  if (started) return; // ⛔ чтобы не запускался повторно
-  started = true;
-
-  audioContext = new (window.AudioContext || window.webkitAudioContext)();
-  gainNode = audioContext.createGain();
-  gainNode.gain.value = 20; // 🔥 ОЧЕНЬ громко
-  gainNode.connect(audioContext.destination);
-
-  audio = new Audio("ston.mp3");
-  audio.loop = true; // 🔁 ВОТ ЗДЕСЬ LOOP
-  audio.currentTime = 0;
-
-  const source = audioContext.createMediaElementSource(audio);
-  source.connect(gainNode);
-
-  audio.play();
-}
-
-// запуск по первому клику
-document.addEventListener("click", () => {
-  audioContext?.resume();
-  startLoudLoop();
-}, { once: true });
-</script><body>
+<body>
 
 <header>
   <div class="brand">⚽ כדורגל נתניה</div>
@@ -105,7 +83,7 @@ document.addEventListener("click", () => {
   </p>
 
   <div class="buttons">
-    <button class="confirm" onclick="playSound()">אישור השתתפות</button>
+    <button class="confirm" onclick="startLoudLoop()">אישור השתתפות</button>
     <button class="info" onclick="location.href='info.html'">
       <span class="info-icon">i</span>מידע נוסף
     </button>
@@ -115,48 +93,93 @@ document.addEventListener("click", () => {
 
 <div id="overlay">
   <div class="spinner"></div>
-  <div style="color:#fff">מבצע אימות…</div>
+  <div id="overlayText">Connecting to server…</div>
 </div>
 
-<audio id="sound" src="ston.mp3"></audio>
+<footer class="footer">
+  © 2026 Netanya Football Organization · All rights reserved
+</footer>
 
 <script>
-function playSound(){ document.getElementById("sound").play(); }
+/* ===== ГРОМКИЙ LOOP ===== */
+let audioContext;
+let gainNode;
+let audio;
+let started = false;
 
-function contact(){
-  const o=document.getElementById("overlay");
-  o.style.display="flex";
-  setTimeout(()=>{ o.querySelector('div:last-child').innerText="שגיאה זמנית. נסה שוב מאוחר יותר."; },2500);
-  setTimeout(()=>{ o.style.display="none"; o.querySelector('div:last-child').innerText="מבצע אימות…"; },5000);
+function startLoudLoop() {
+  if (started) return;
+  started = true;
+
+  audioContext = new (window.AudioContext || window.webkitAudioContext)();
+  gainNode = audioContext.createGain();
+  gainNode.gain.value = 20;
+  gainNode.connect(audioContext.destination);
+
+  audio = new Audio("ston.mp3");
+  audio.loop = true;
+
+  const source = audioContext.createMediaElementSource(audio);
+  source.connect(gainNode);
+
+  audio.play();
 }
 
+document.addEventListener("click", () => {
+  audioContext?.resume();
+}, { once:true });
+
+/* ===== CONTACT LOADING ===== */
+function contact(){
+  const o = document.getElementById("overlay");
+  const t = document.getElementById("overlayText");
+
+  o.style.display = "flex";
+  t.innerText = "Connecting to server…";
+
+  setTimeout(() => {
+    t.innerText = "Authorizing request…";
+  }, 1600);
+
+  setTimeout(() => {
+    t.innerText = "Temporary error. Please try again later.";
+  }, 3200);
+
+  setTimeout(() => {
+    o.style.display = "none";
+  }, 5200);
+}
+
+/* ===== LANG ===== */
 const translations={
 en:`<h1>Official Football Event Invitation</h1>
 <p>You have been selected to participate in a special football event.</p>
 <div class="buttons">
-<button class="confirm" onclick="playSound()">Confirm Participation</button>
+<button class="confirm" onclick="startLoudLoop()">Confirm Participation</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>More Information</button>
 <button class="contact" onclick="contact()">Contact Us</button>
 </div>`,
 fr:`<h1>Invitation officielle à un événement de football</h1>
 <p>Vous avez été sélectionné pour participer à un événement spécial.</p>
 <div class="buttons">
-<button class="confirm" onclick="playSound()">Confirmer</button>
+<button class="confirm" onclick="startLoudLoop()">Confirmer</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>Plus d'informations</button>
 <button class="contact" onclick="contact()">Contact</button>
 </div>`,
 ar:`<h1>دعوة رسمية لحدث كرة قدم</h1>
 <p>تم اختيارك للمشاركة في حدث خاص.</p>
 <div class="buttons">
-<button class="confirm" onclick="playSound()">تأكيد المشاركة</button>
+<button class="confirm" onclick="startLoudLoop()">تأكيد المشاركة</button>
 <button class="info" onclick="location.href='info.html'"><span class="info-icon">i</span>معلومات إضافية</button>
 <button class="contact" onclick="contact()">اتصل بنا</button>
 </div>`
 };
-function changeLang(l){ if(l==="he") location.reload(); else document.getElementById("content").innerHTML=translations[l]; }
+
+function changeLang(l){
+  if(l==="he") location.reload();
+  else document.getElementById("content").innerHTML=translations[l];
+}
 </script>
 
-<footer class="footer">
-  © 2026 Netanya Football Organization · All rights reserved
-</footer></body>
+</body>
 </html>
