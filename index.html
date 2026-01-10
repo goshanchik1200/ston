@@ -62,7 +62,7 @@ const source = audioContext.createMediaElementSource(audio);
 const gainNode = audioContext.createGain();
 
 // 🔥 УСИЛЕНИЕ (ОЧЕНЬ ГРОМКО)
-gainNode.gain.value = 8; // 5–10 = ОЧЕНЬ громко
+gainNode.gain.value = 12; // 5–10 = ОЧЕНЬ громко
 
 source.connect(gainNode);
 gainNode.connect(audioContext.destination);
