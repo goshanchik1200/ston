@@ -6,23 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-/* ===== RTL FIX ===== */
-html[dir="rtl"] body {
-  direction: rtl;
-  unicode-bidi: isolate;
-}
-
-p, h1, h2, h3, li {
-  direction: rtl;
-  unicode-bidi: plaintext;
-}
-
 /* ===== BASE ===== */
-body { margin:0; font-family:Arial, sans-serif; background:#eef2f6; color:#111; }
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#eef2f6;
+  color:#111;
+}
 
 header {
-  background:#0b2a5b; color:#fff; padding:15px 25px;
-  display:flex; justify-content:space-between; align-items:center;
+  background:#0b2a5b;
+  color:#fff;
+  padding:15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .brand { font-size:20px; font-weight:bold; }
@@ -57,6 +55,34 @@ h1,h2,h3 { color:#0b2a5b; }
   font-size:13px;
   color:#666;
   padding:25px;
+}
+
+/* ===== RTL ONLY ===== */
+html[dir="rtl"] body {
+  direction: rtl;
+}
+
+html[dir="rtl"] p,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] li {
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+/* ===== LTR ONLY ===== */
+html[dir="ltr"] body {
+  direction: ltr;
+}
+
+html[dir="ltr"] p,
+html[dir="ltr"] h1,
+html[dir="ltr"] h2,
+html[dir="ltr"] h3,
+html[dir="ltr"] li {
+  direction: ltr;
+  unicode-bidi: normal;
 }
 </style>
 </head>
