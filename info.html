@@ -1,32 +1,63 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <title>מידע נוסף | כדורגל נתניה</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+/* ===== RTL FIX ===== */
+html[dir="rtl"] body {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+p, h1, h2, h3, li {
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+/* ===== BASE ===== */
 body { margin:0; font-family:Arial, sans-serif; background:#eef2f6; color:#111; }
+
 header {
   background:#0b2a5b; color:#fff; padding:15px 25px;
   display:flex; justify-content:space-between; align-items:center;
 }
+
 .brand { font-size:20px; font-weight:bold; }
 .language select { padding:4px; font-size:13px; color:#000; }
 
 .container {
-  max-width:900px; margin:40px auto; background:#fff; padding:40px;
-  box-shadow:0 0 20px rgba(0,0,0,.15); line-height:1.9;
+  max-width:900px;
+  margin:40px auto;
+  background:#fff;
+  padding:40px;
+  box-shadow:0 0 20px rgba(0,0,0,.15);
+  line-height:1.9;
 }
+
 h1,h2,h3 { color:#0b2a5b; }
 
 .back {
-  display:inline-flex; align-items:center; gap:8px; margin-bottom:20px;
-  color:#0b2a5b; cursor:pointer; text-decoration:none; font-weight:bold;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:20px;
+  color:#0b2a5b;
+  cursor:pointer;
+  text-decoration:none;
+  font-weight:bold;
 }
+
 .back span { font-size:18px; }
 
-.footer { text-align:center; font-size:13px; color:#666; padding:25px; }
+.footer {
+  text-align:center;
+  font-size:13px;
+  color:#666;
+  padding:25px;
+}
 </style>
 </head>
 
@@ -60,8 +91,6 @@ h1,h2,h3 { color:#0b2a5b; }
 <p>
 היוזמה נולדה מתוך רצון לחזק את הקשר בין הקהילה, השחקנים והמערכת המקצועית,
 ולאפשר חוויות עומק למשתתפים שנמצאו מתאימים על פי קריטריונים מוגדרים מראש.
-האירועים מתקיימים במתכונת מצומצמת, בפיקוח מקצועי, ולעיתים כוללים תיעוד פנימי
-לצרכים ארגוניים ותקשורתיים.
 </p>
 
 <h2>מה כולל האירוע?</h2>
@@ -74,22 +103,18 @@ h1,h2,h3 { color:#0b2a5b; }
 
 <h2>כיצד פועל מנגנון הבחירה?</h2>
 <p>
-מערכת הבחירה פועלת באופן אוטומטי ומבוססת נתונים. המערכת בוחנת השתתפות קודמת
-בפעילות ספורטיבית, מעורבות קהילתית, ורישומים היסטוריים לאירועים דומים.
-הבחירה אינה אקראית ואינה מבוססת הרשמה פתוחה.
+מערכת הבחירה פועלת באופן אוטומטי ומבוססת נתונים. הבחירה אינה אקראית
+ואינה מבוססת הרשמה פתוחה.
 </p>
 
 <h2>מדוע קיבלת את ההזמנה?</h2>
 <p>
-הפרופיל שלך נמצא תואם לקריטריונים של אחד האירועים הקרובים. התאמה זו אינה
-מהווה התחייבות עתידית ואינה מבטיחה השתתפות קבועה, אלא הזדמנות חד-פעמית
-לאירוע מסוים.
+הפרופיל שלך נמצא תואם לקריטריונים של אחד האירועים הקרובים.
 </p>
 
 <h2>שלבים לאחר אישור השתתפות</h2>
 <p>
-לאחר אישור ההשתתפות, תתבצע בדיקה טכנית של זמינות, ובהמשך יישלחו פרטים משלימים:
-מיקום, שעות, הנחיות כלליות וכל מידע רלוונטי נוסף.
+לאחר האישור יישלחו פרטים משלימים הכוללים מיקום, שעות והנחיות כלליות.
 </p>
 
 <h3>הבהרות חשובות</h3>
@@ -97,12 +122,11 @@ h1,h2,h3 { color:#0b2a5b; }
   <li>מספר המקומות מוגבל</li>
   <li>האירוע מיועד למוזמנים בלבד</li>
   <li>אין להעביר את ההזמנה לצד שלישי</li>
-  <li>הנהלת כדורגל נתניה רשאית לבצע שינויים</li>
+  <li>ייתכנו שינויים ארגוניים</li>
 </ul>
 
 <p>
-אם הגעת לעמוד זה – סימן שנבחרת להיכלל בקבוצה מצומצמת של מוזמנים.
-אנו ממליצים לעיין במידע בעיון לפני קבלת החלטה.
+אנו ממליצים לקרוא מידע זה בעיון לפני קבלת החלטה.
 </p>
 
 </div>
@@ -117,7 +141,11 @@ en:`<a class="back" href="index.html"><span>←</span> Back to invitation</a>
 <h2>Program background</h2>
 <p>The initiative strengthens community and professional connections.</p>
 <h2>What does the event include?</h2>
-<ul><li>Dedicated match format</li><li>Professional staff presence</li><li>Logistical coordination</li></ul>
+<ul>
+<li>Dedicated match format</li>
+<li>Professional staff presence</li>
+<li>Logistical coordination</li>
+</ul>
 <h2>Selection mechanism</h2>
 <p>Automatic data-based selection. Not open registration.</p>
 <h2>Why you were selected</h2>
@@ -127,19 +155,47 @@ en:`<a class="back" href="index.html"><span>←</span> Back to invitation</a>
 fr:`<a class="back" href="index.html"><span>←</span> Retour à l'invitation</a>
 <h1>Programme d'invitation spéciale – Informations complètes</h1>
 <p>Netanya Football organise une initiative sélective.</p>
-<h2>Contexte</h2><p>Renforcer le lien communautaire et professionnel.</p>
+<h2>Contexte</h2>
+<p>Renforcer le lien communautaire et professionnel.</p>
 <h2>Contenu de l'événement</h2>
-<ul><li>Match dédié</li><li>Équipe professionnelle</li></ul>
-<h2>Sélection</h2><p>Sélection automatique basée sur les données.</p>`,
+<ul>
+<li>Match dédié</li>
+<li>Équipe professionnelle</li>
+</ul>
+<h2>Sélection</h2>
+<p>Sélection automatique basée sur les données.</p>`,
 ar:`<a class="back" href="index.html"><span>←</span> العودة إلى الدعوة</a>
 <h1>برنامج الدعوة الخاصة – معلومات كاملة</h1>
 <p>تنظم كرة قدم نتانيا مبادرة انتقائية.</p>
-<h2>الخلفية</h2><p>تعزيز الروابط المجتمعية والمهنية.</p>
+<h2>الخلفية</h2>
+<p>تعزيز الروابط المجتمعية والمهنية.</p>
 <h2>محتوى الحدث</h2>
-<ul><li>مباراة مخصصة</li><li>طاقم محترف</li></ul>
-<h2>آلية الاختيار</h2><p>اختيار تلقائي قائم على البيانات.</p>`
+<ul>
+<li>مباراة مخصصة</li>
+<li>طاقم محترف</li>
+</ul>
+<h2>آلية الاختيار</h2>
+<p>اختيار تلقائي قائم على البيانات.</p>`
 };
-function changeLang(l){ if(l==="he") location.reload(); else document.getElementById("content").innerHTML=translations[l]; }
+
+function changeLang(l){
+  if(l==="he"){
+    document.documentElement.lang="he";
+    document.documentElement.dir="rtl";
+    location.reload();
+    return;
+  }
+
+  if(l==="ar"){
+    document.documentElement.lang="ar";
+    document.documentElement.dir="rtl";
+  } else {
+    document.documentElement.lang=l;
+    document.documentElement.dir="ltr";
+  }
+
+  document.getElementById("content").innerHTML=translations[l];
+}
 </script>
 
 </body>
