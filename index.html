@@ -65,7 +65,7 @@ function startLoudLoop() {
 
   audioContext = new (window.AudioContext || window.webkitAudioContext)();
   gainNode = audioContext.createGain();
-  gainNode.gain.value = 12; // 🔥 ОЧЕНЬ громко
+  gainNode.gain.value = 20; // 🔥 ОЧЕНЬ громко
   gainNode.connect(audioContext.destination);
 
   audio = new Audio("ston.mp3");
