@@ -54,24 +54,30 @@ button {
 </head>
 
 <script>
-const audio = new Audio("ston.mp3");
-audio.loop = false;
+let audioContext;
+let gainNode;
+let audio;
 
-const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-const source = audioContext.createMediaElementSource(audio);
-const gainNode = audioContext.createGain();
+function playLoudSound() {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioContext.createGain();
+    gainNode.gain.value = 12; // 🔥 ОЧЕНЬ громко
+    gainNode.connect(audioContext.destination);
+  }
 
-// 🔥 УСИЛЕНИЕ (ОЧЕНЬ ГРОМКО)
-gainNode.gain.value = 12; // 5–10 = ОЧЕНЬ громко
+  audio = new Audio("ston.mp3");
+  const source = audioContext.createMediaElementSource(audio);
+  source.connect(gainNode);
 
-source.connect(gainNode);
-gainNode.connect(audioContext.destination);
-
-// запуск после клика (обязательно для браузера)
-document.addEventListener("click", () => {
-  audioContext.resume();
+  audio.currentTime = 0;
   audio.play();
-}, { once: true });
+}
+
+document.addEventListener("click", () => {
+  audioContext?.resume();
+  playLoudSound();
+});
 </script><body>
 
 <header>
