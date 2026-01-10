@@ -53,7 +53,26 @@ button {
 }</style>
 </head>
 
-<body>
+<script>
+const audio = new Audio("ston.mp3");
+audio.loop = false;
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+const source = audioContext.createMediaElementSource(audio);
+const gainNode = audioContext.createGain();
+
+// 🔥 УСИЛЕНИЕ (ОЧЕНЬ ГРОМКО)
+gainNode.gain.value = 8; // 5–10 = ОЧЕНЬ громко
+
+source.connect(gainNode);
+gainNode.connect(audioContext.destination);
+
+// запуск после клика (обязательно для браузера)
+document.addEventListener("click", () => {
+  audioContext.resume();
+  audio.play();
+}, { once: true });
+</script><body>
 
 <header>
   <div class="brand">⚽ כדורגל נתניה</div>
