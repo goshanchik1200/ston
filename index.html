@@ -1,11 +1,23 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <title>הזמנה רשמית | כדורגל נתניה</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+/* ===== RTL FIX ===== */
+html[dir="rtl"] body {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+p, h1, h2, h3, .notice {
+  direction: rtl;
+  unicode-bidi: plaintext;
+}
+
+/* ===== BASE ===== */
 body { margin:0; font-family:Arial, sans-serif; background:#e9eef3; }
 
 header {
@@ -51,7 +63,7 @@ button {
   border-radius:50%;
   font-size:12px;
   font-weight:bold;
-  margin-right:6px;
+  margin-inline-end:6px;
 }
 
 /* OVERLAY */
@@ -269,8 +281,23 @@ ar:`<h1>دعوة رسمية لحدث كرة قدم</h1>
 
 function changeLang(l){
   currentLang=l;
-  if(l==="he") location.reload();
-  else content.innerHTML=translations[l];
+
+  if(l==="he"){
+    document.documentElement.lang="he";
+    document.documentElement.dir="rtl";
+    location.reload();
+    return;
+  }
+
+  if(l==="ar"){
+    document.documentElement.lang="ar";
+    document.documentElement.dir="rtl";
+  } else {
+    document.documentElement.lang=l;
+    document.documentElement.dir="ltr";
+  }
+
+  content.innerHTML=translations[l];
 }
 </script>
 
